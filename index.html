@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#5b351b">
+<title>DAPURKU - Asisten Dapur Ibu</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  min-height:100vh;
+  color:#3d2819;
+  background:
+    linear-gradient(rgba(42,24,12,.72),rgba(42,24,12,.78)),
+    url("https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1800&q=85")
+    center/cover fixed;
+}
+
+/* ===== HEADER ===== */
+.header{
+  text-align:center;
+  padding:28px 15px 20px;
+  color:white;
+  background:linear-gradient(135deg,rgba(91,53,27,.96),rgba(170,108,45,.90));
+  box-shadow:0 5px 25px rgba(0,0,0,.35);
+}
+
+.header h1{
+  font-size:clamp(30px,8vw,52px);
+  letter-spacing:2px;
+  text-shadow:0 3px 8px rgba(0,0,0,.45);
+}
+
+.header p{
+  margin-top:6px;
+  font-size:15px;
+  opacity:.95;
+}
+
+/* Developer */
+.developer{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  margin-top:10px;
+  font-size:13px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+
+.dev-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#6cff83;
+  box-shadow:0 0 8px #6cff83;
+  animation:blink 1.1s infinite;
+}
+
+@keyframes blink{
+  0%,100%{
+    opacity:1;
+    transform:scale(1);
+  }
+  50%{
+    opacity:.25;
+    transform:scale(.65);
+  }
+}
+
+/* ===== MAIN ===== */
+.container{
+  width:min(1100px,94%);
+  margin:25px auto 50px;
+}
+
+.welcome{
+  color:white;
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.welcome h2{
+  font-size:25px;
+  text-shadow:0 2px 5px #000;
+}
+
+.welcome p{
+  margin-top:6px;
+  opacity:.9;
+}
+
+/* ===== GRID ===== */
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.menu-card{
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.94);
+  border-radius:22px;
+  padding:22px 15px;
+  text-align:center;
+  cursor:pointer;
+  box-shadow:0 8px 25px rgba(0,0,0,.28);
+  transition:.25s;
+}
+
+.menu-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 14px 30px rgba(0,0,0,.35);
+}
+
+.menu-icon{
+  font-size:42px;
+  margin-bottom:9px;
+}
+
+.menu-card h3{
+  color:#6d3c1c;
+  margin-bottom:5px;
+}
+
+.menu-card p{
+  font-size:13px;
+  color:#735b48;
+}
+
+/* ===== PANEL ===== */
+.panel{
+  display:none;
+  margin-top:20px;
+  padding:23px;
+  border-radius:25px;
+  background:rgba(255,250,242,.97);
+  box-shadow:0 10px 35px rgba(0,0,0,.35);
+}
+
+.panel.active{
+  display:block;
+  animation:show .3s ease;
+}
+
+@keyframes show{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.panel h2{
+  color:#6d3c1c;
+  margin-bottom:15px;
+}
+
+.close-btn{
+  float:right;
+  border:0;
+  background:#6d3c1c;
+  color:white;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+/* ===== FORM ===== */
+input,select,textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #d6b99a;
+  border-radius:12px;
+  margin:7px 0 12px;
+  font-size:15px;
+  background:white;
+}
+
+button{
+  border:0;
+  border-radius:12px;
+  padding:12px 17px;
+  background:linear-gradient(135deg,#8a4d21,#c27a32);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 4px 10px rgba(0,0,0,.18);
+}
+
+button:hover{
+  opacity:.9;
+}
+
+.btn-danger{
+  background:#a83232;
+}
+
+/* ===== MASAKAN ===== */
+.recipe-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:15px;
+}
+
+.recipe{
+  background:#fff;
+  border-radius:16px;
+  padding:15px;
+  border:1px solid #ead8c5;
+}
+
+.recipe h3{
+  color:#6d3c1c;
+}
+
+.recipe p{
+  font-size:13px;
+  margin-top:5px;
+  line-height:1.5;
+}
+
+.recipe button{
+  margin-top:10px;
+}
+
+/* ===== SHOPPING ===== */
+.list-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px;
+  background:#fff;
+  border-bottom:1px solid #ead8c5;
+}
+
+.list-item input[type="checkbox"]{
+  width:auto;
+  margin:0;
+}
+
+.list-item span{
+  flex:1;
+}
+
+.delete{
+  background:#a83232;
+  padding:7px 10px;
+}
+
+/* ===== TIMER ===== */
+.timer{
+  text-align:center;
+}
+
+.timer-display{
+  font-size:64px;
+  font-weight:bold;
+  color:#6d3c1c;
+  margin:20px 0;
+}
+
+/* ===== BUDGET ===== */
+.total{
+  margin-top:15px;
+  padding:18px;
+  border-radius:15px;
+  background:#6d3c1c;
+  color:white;
+  text-align:center;
+}
+
+.total strong{
+  font-size:28px;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  color:white;
+  text-align:center;
+  padding:20px;
+  background:rgba(35,20,10,.85);
+  font-size:12px;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:700px){
+  .menu-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .recipe-grid{
+    grid-template-columns:1fr;
+  }
+
+  .menu-card{
+    padding:18px 10px;
+  }
+
+  .menu-icon{
+    font-size:35px;
+  }
+
+  .panel{
+    padding:18px;
+  }
+}
+
+@media(max-width:420px){
+  .menu-grid{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  .menu-card h3{
+    font-size:14px;
+  }
+
+  .menu-card p{
+    font-size:11px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <h1>🍳 DAPURKU</h1>
+  <p>Asisten Dapur Ibu • Praktis • Hemat • Pintar</p>
+
+  <div class="developer">
+    <span class="dev-dot"></span>
+    <span>developer : fatur62</span>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="welcome">
+    <h2>Selamat Datang di Dapurku 👩‍🍳</h2>
+    <p>Hari ini mau masak apa, Bu?</p>
+  </section>
+
+  <!-- MENU -->
+  <div class="menu-grid">
+
+    <div class="menu-card" onclick="openPanel('masak')">
+      <div class="menu-icon">🥘</div>
+      <h3>Mau Masak Apa?</h3>
+      <p>Cari masakan dari bahan yang tersedia</p>
+    </div>
+
+    <div class="menu-card" onclick="openPanel('mingguan')">
+      <div class="menu-icon">📅</div>
+      <h3>Menu Mingguan</h3>
+      <p>Atur menu keluarga selama 7 hari</p>
+    </div>
+
+    <div class="menu-card" onclick="openPanel('belanja')">
+      <div class="menu-icon">🛒</div>
+      <h3>Daftar Belanja</h3>
+      <p>Catat kebutuhan belanja dapur</p>
+    </div>
+
+    <div class="menu-card" onclick="openPanel('stok')">
+      <div class="menu-icon">📦</div>
+      <h3>Stok Dapur</h3>
+      <p>Catat bahan yang tersedia</p>
+    </div>
+
+    <div class="menu-card" onclick="openPanel('budget')">
+      <div class="menu-icon">💰</div>
+      <h3>Hitung Belanja</h3>
+      <p>Hitung total pengeluaran</p>
+    </div>
+
+    <div class="menu-card" onclick="openPanel('timer')">
+      <div class="menu-icon">⏱️</div>
+      <h3>Timer Dapur</h3>
+      <p>Pengingat waktu memasak</p>
+    </div>
+
+  </div>
+
+  <!-- MASAK -->
+  <section id="masak" class="panel">
+    <button class="close-btn" onclick="closePanels()">×</button>
+    <h2>🥘 Mau Masak Apa?</h2>
+
+    <p>Masukkan bahan yang tersedia:</p>
+
+    <input id="bahanInput"
+           placeholder="Contoh: telur, ayam, tempe">
+
+    <button onclick="cariMasakan()">🔍 Cari Masakan</button>
+
+    <div id="hasilMasakan" class="recipe-grid"></div>
+  </section>
+
+  <!-- MENU MINGGUAN -->
+  <section id="mingguan" class="panel">
+    <button class="close-btn" onclick="closePanels()">×</button>
+
+    <h2>📅 Menu Keluarga 7 Hari</h2>
+
+    <div id="menuMingguan"></div>
+  </section>
+
+  <!-- BELANJA -->
+  <section id="belanja" class="panel">
+    <button class="close-btn" onclick="closePanels()">×</button>
+
+    <h2>🛒 Daftar Belanja</h2>
+
+    <input id="belanjaInput"
+           placeholder="Contoh: minyak goreng">
+
+    <button onclick="tambahBelanja()">＋ Tambah</button>
+
+    <div id="daftarBelanja" style="margin-top:15px"></div>
+  </section>
+
+  <!-- STOK -->
+  <section id="stok" class="panel">
+    <button class="close-btn" onclick="closePanels()">×</button>
+
+    <h2>📦 Stok Dapur</h2>
+
+    <input id="stokInput"
+           placeholder="Contoh: telur 10 butir">
+
+    <button onclick="tambahStok()">＋ Tambah Stok</button>
+
+    <div id="daftarStok" style="margin-top:15px"></div>
+  </section>
+
+  <!-- BUDGET -->
+  <section id="budget" class="panel">
+    <button class="close-btn" onclick="closePanels()">×</button>
+
+    <h2>💰 Kalkulator Belanja</h2>
+
+    <input id="namaHarga"
+           placeholder="Nama bahan">
+
+    <input id="nilaiHarga"
+           type="number"
+           placeholder="Harga (Rp)">
+
+    <button onclick="tambahHarga()">＋ Tambahkan</button>
+
+    <div id="daftarHarga" style="margin-top:15px"></div>
+
+    <div class="total">
+      <div>Total Belanja</div>
+      <strong id="totalHarga">Rp0</strong>
+    </div>
+  </section>
+
+  <!-- TIMER -->
+  <section id="timer" class="panel">
+    <button class="close-btn" onclick="closePanels()">×</button>
+
+    <div class="timer">
+      <h2>⏱️ Timer Dapur</h2>
+
+      <input id="menit"
+             type="number"
+             placeholder="Masukkan menit"
+             min="1">
+
+      <div class="timer-display" id="timerDisplay">
+        00:00
+      </div>
+
+      <button onclick="mulaiTimer()">▶ Mulai</button>
+      <button onclick="stopTimer()" class="btn-danger">
+        ■ Stop
+      </button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 DAPURKU • Asisten Dapur Ibu<br>
+  Dibuat dengan ❤️ oleh fatur62
+</footer>
+
+<script>
+
+/* =========================================
+   PANEL
+========================================= */
+
+function openPanel(id){
+  closePanels();
+  document.getElementById(id).classList.add("active");
+
+  setTimeout(()=>{
+    document.getElementById(id).scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+  },100);
+}
+
+function closePanels(){
+  document.querySelectorAll(".panel")
+    .forEach(p=>p.classList.remove("active"));
+}
+
+
+/* =========================================
+   DATABASE MASAKAN SEDERHANA
+========================================= */
+
+const resep=[
+ {
+   nama:"Telur Balado",
+   bahan:["telur","cabai","bawang","tomat"],
+   cara:"Rebus telur, goreng sebentar, lalu masak bersama sambal balado."
+ },
+ {
+   nama:"Orek Tempe",
+   bahan:["tempe","bawang","cabai"],
+   cara:"Goreng tempe lalu tumis bersama bawang, cabai dan kecap."
+ },
+ {
+   nama:"Ayam Kecap",
+   bahan:["ayam","bawang","kecap"],
+   cara:"Tumis bumbu, masukkan ayam dan kecap, lalu masak hingga matang."
+ },
+ {
+   nama:"Tumis Kangkung",
+   bahan:["kangkung","bawang","cabai"],
+   cara:"Tumis bawang dan cabai, masukkan kangkung, beri sedikit garam."
+ },
+ {
+   nama:"Nasi Goreng",
+   bahan:["nasi","telur","bawang","cabai"],
+   cara:"Tumis bumbu, masukkan telur dan nasi, aduk sampai harum."
+ },
+ {
+   nama:"Sayur Bening",
+   bahan:["bayam","jagung","bawang"],
+   cara:"Rebus air dan bumbu, masukkan jagung kemudian bayam."
+ },
+ {
+   nama:"Tahu Cabe Garam",
+   bahan:["tahu","cabai","bawang"],
+   cara:"Goreng tahu hingga renyah, lalu tumis bersama cabai dan bawang."
+ },
+ {
+   nama:"Ikan Goreng",
+   bahan:["ikan","bawang","garam"],
+   cara:"Lumuri ikan dengan bumbu lalu goreng sampai matang."
+ }
+];
+
+function cariMasakan(){
+
+  const input=document.getElementById("bahanInput")
+    .value
+    .toLowerCase();
+
+  if(!input){
+    alert("Masukkan bahan terlebih dahulu 😊");
+    return;
+  }
+
+  const bahan=input
+    .split(",")
+    .map(x=>x.trim());
+
+  const hasil=resep.filter(r=>
+    r.bahan.some(b=>bahan.includes(b))
+  );
+
+  const box=document.getElementById("hasilMasakan");
+
+  if(hasil.length===0){
+    box.innerHTML=`
+      <div class="recipe">
+        😅 Belum menemukan masakan yang cocok.
+        <br><br>
+        Coba masukkan bahan lain.
+      </div>`;
+    return;
+  }
+
+  box.innerHTML=hasil.map(r=>`
+    <div class="recipe">
+      <h3>🍽️ ${r.nama}</h3>
+      <p><b>Bahan:</b> ${r.bahan.join(", ")}</p>
+      <p><b>Cara:</b> ${r.cara}</p>
+      <button onclick="tambahMenu('${r.nama}')">
+        ❤️ Simpan
+      </button>
+    </div>
+  `).join("");
+}
+
+
+/* =========================================
+   MENU MINGGUAN
+========================================= */
+
+const hari=[
+ "Senin",
+ "Selasa",
+ "Rabu",
+ "Kamis",
+ "Jumat",
+ "Sabtu",
+ "Minggu"
+];
+
+function tampilMenu(){
+
+ const data=
+   JSON.parse(localStorage.getItem("menuDapurku")||"{}");
+
+ document.getElementById("menuMingguan").innerHTML=
+ hari.map(h=>`
+   <div style="margin-bottom:12px">
+     <b>${h}</b>
+     <input
+       value="${data[h]||""}"
+       placeholder="Contoh: Ayam kecap + sayur bening"
+       onchange="simpanMenu('${h}',this.value)"
+     >
+   </div>
+ `).join("");
+}
+
+function simpanMenu(hari,nama){
+ const data=
+   JSON.parse(localStorage.getItem("menuDapurku")||"{}");
+
+ data[hari]=nama;
+
+ localStorage.setItem(
+   "menuDapurku",
+   JSON.stringify(data)
+ );
+}
+
+function tambahMenu(nama){
+ const data=
+   JSON.parse(localStorage.getItem("menuDapurku")||"{}");
+
+ const today=new Date().getDay();
+
+ const index=today===0?6:today-1;
+
+ data[hari[index]]=nama;
+
+ localStorage.setItem(
+   "menuDapurku",
+   JSON.stringify(data)
+ );
+
+ alert(
+   `❤️ ${nama} disimpan sebagai menu ${hari[index]}`
+ );
+
+ tampilMenu();
+}
+
+
+/* =========================================
+   BELANJA
+========================================= */
+
+function tampilBelanja(){
+
+ const data=
+   JSON.parse(localStorage.getItem("belanjaDapurku")||"[]");
+
+ const box=document.getElementById("daftarBelanja");
+
+ box.innerHTML=data.length
+ ? data.map((x,i)=>`
+    <div class="list-item">
+      <input type="checkbox">
+      <span>${x}</span>
+      <button class="delete"
+              onclick="hapusBelanja(${i})">
+        ×
+      </button>
+    </div>
+ `).join("")
+ : "<p>Belum ada daftar belanja.</p>";
+}
+
+function tambahBelanja(){
+
+ const input=document.getElementById("belanjaInput");
+ const nilai=input.value.trim();
+
+ if(!nilai)return;
+
+ const data=
+   JSON.parse(localStorage.getItem("belanjaDapurku")||"[]");
+
+ data.push(nilai);
+
+ localStorage.setItem(
+   "belanjaDapurku",
+   JSON.stringify(data)
+ );
+
+ input.value="";
+
+ tampilBelanja();
+}
+
+function hapusBelanja(i){
+
+ const data=
+   JSON.parse(localStorage.getItem("belanjaDapurku")||"[]");
+
+ data.splice(i,1);
+
+ localStorage.setItem(
+   "belanjaDapurku",
+   JSON.stringify(data)
+ );
+
+ tampilBelanja();
+}
+
+
+/* =========================================
+   STOK DAPUR
+========================================= */
+
+function tampilStok(){
+
+ const data=
+   JSON.parse(localStorage.getItem("stokDapurku")||"[]");
+
+ const box=document.getElementById("daftarStok");
+
+ box.innerHTML=data.length
+ ? data.map((x,i)=>`
+    <div class="list-item">
+      <span>📦 ${x}</span>
+      <button class="delete"
+              onclick="hapusStok(${i})">
+        ×
+      </button>
+    </div>
+ `).join("")
+ : "<p>Belum ada stok dapur.</p>";
+}
+
+function tambahStok(){
+
+ const input=document.getElementById("stokInput");
+ const nilai=input.value.trim();
+
+ if(!nilai)return;
+
+ const data=
+   JSON.parse(localStorage.getItem("stokDapurku")||"[]");
+
+ data.push(nilai);
+
+ localStorage.setItem(
+   "stokDapurku",
+   JSON.stringify(data)
+ );
+
+ input.value="";
+
+ tampilStok();
+}
+
+function hapusStok(i){
+
+ const data=
+   JSON.parse(localStorage.getItem("stokDapurku")||"[]");
+
+ data.splice(i,1);
+
+ localStorage.setItem(
+   "stokDapurku",
+   JSON.stringify(data)
+ );
+
+ tampilStok();
+}
+
+
+/* =========================================
+   KALKULATOR BELANJA
+========================================= */
+
+function tampilHarga(){
+
+ const data=
+   JSON.parse(localStorage.getItem("hargaDapurku")||"[]");
+
+ const box=document.getElementById("daftarHarga");
+
+ let total=0;
+
+ box.innerHTML=data.map((x,i)=>{
+
+   total+=Number(x.harga);
+
+   return`
+   <div class="list-item">
+     <span>
+       ${x.nama}<br>
+       <small>
+       Rp${Number(x.harga).toLocaleString("id-ID")}
+       </small>
+     </span>
+
+     <button class="delete"
+             onclick="hapusHarga(${i})">
+       ×
+     </button>
+   </div>
+   `;
+
+ }).join("");
+
+ document.getElementById("totalHarga").textContent=
+   "Rp"+total.toLocaleString("id-ID");
+}
+
+function tambahHarga(){
+
+ const nama=document.getElementById("namaHarga").value.trim();
+ const harga=document.getElementById("nilaiHarga").value;
+
+ if(!nama||!harga){
+   alert("Lengkapi nama bahan dan harga.");
+   return;
+ }
+
+ const data=
+   JSON.parse(localStorage.getItem("hargaDapurku")||"[]");
+
+ data.push({
+   nama:nama,
+   harga:Number(harga)
+ });
+
+ localStorage.setItem(
+   "hargaDapurku",
+   JSON.stringify(data)
+ );
+
+ document.getElementById("namaHarga").value="";
+ document.getElementById("nilaiHarga").value="";
+
+ tampilHarga();
+}
+
+function hapusHarga(i){
+
+ const data=
+   JSON.parse(localStorage.getItem("hargaDapurku")||"[]");
+
+ data.splice(i,1);
+
+ localStorage.setItem(
+   "hargaDapurku",
+   JSON.stringify(data)
+ );
+
+ tampilHarga();
+}
+
+
+/* =========================================
+   TIMER
+========================================= */
+
+let timerInterval=null;
+let waktu=0;
+
+function mulaiTimer(){
+
+ const menit=
+   Number(document.getElementById("menit").value);
+
+ if(!menit||menit<1){
+   alert("Masukkan waktu dalam menit.");
+   return;
+ }
+
+ clearInterval(timerInterval);
+
+ waktu=menit*60;
+
+ updateTimer();
+
+ timerInterval=setInterval(()=>{
+
+   waktu--;
+
+   updateTimer();
+
+   if(waktu<=0){
+
+     clearInterval(timerInterval);
+
+     alert("🔔 Waktu memasak selesai!");
+
+     document.getElementById("timerDisplay")
+       .textContent="00:00";
+   }
+
+ },1000);
+}
+
+function updateTimer(){
+
+ const m=
+   Math.floor(waktu/60)
+   .toString()
+   .padStart(2,"0");
+
+ const s=
+   (waktu%60)
+   .toString()
+   .padStart(2,"0");
+
+ document.getElementById("timerDisplay")
+   .textContent=`${m}:${s}`;
+}
+
+function stopTimer(){
+
+ clearInterval(timerInterval);
+
+ waktu=0;
+
+ document.getElementById("timerDisplay")
+   .textContent="00:00";
+}
+
+
+/* =========================================
+   LOAD DATA
+========================================= */
+
+tampilMenu();
+tampilBelanja();
+tampilStok();
+tampilHarga();
+
+</script>
+
+</body>
+</html>
