@@ -399,7 +399,7 @@ footer{
     <p>Masukkan bahan yang tersedia:</p>
 
     <input id="bahanInput"
-           placeholder="Contoh: telur, ayam, tempe">
+           placeholder="Contoh: ikan nila, daging sapi, telur, ayam">
 
     <button onclick="cariMasakan()">🔍 Cari Masakan</button>
 
@@ -436,7 +436,7 @@ footer{
     <h2>📦 Stok Dapur</h2>
 
     <input id="stokInput"
-           placeholder="Contoh: telur 10 butir">
+           placeholder="Contoh: daging sapi 500gr, ikan nila 2 ekor">
 
     <button onclick="tambahStok()">＋ Tambah Stok</button>
 
@@ -545,25 +545,114 @@ function closePanels(){
 
 
 /* =========================================
-   DATABASE MASAKAN DIPERLUAS (35+ RESEP)
+   DATABASE MASAKAN LENGKAP (TELUR, IKAN, DAGING, AYAM, SAYUR)
 ========================================= */
 
 const resep = [
-  // --- Kategori Olahan Telur Lengkap ---
+  // --- ANEKA IKAN (AIR TAWAR & LAUT) ---
+  {
+    nama: "Ikan Nila Goreng Sambal Terasi",
+    bahan: ["ikan", "ikan nila", "kunyit", "bawang putih", "cabai", "terasi", "jeruk nipis"],
+    cara: "Marinasi ikan nila dengan jeruk nipis, kunyit, dan garam, goreng kering. Sajikan dengan ulekan sambal terasi segar."
+  },
+  {
+    nama: "Ikan Gurame Asam Manis",
+    bahan: ["ikan", "ikan gurame", "saus tomat", "bawang bombay", "nanas", "tepung maizena", "wortel"],
+    cara: "Goreng ikan gurame yang sudah dibalut tepung tipis hingga renyah. Masak saus asam manis dengan irisan nanas dan bawang bombay, siram ke ikan."
+  },
+  {
+    nama: "Ikan Tongkol Suwir Balado Kemangi",
+    bahan: ["ikan", "ikan tongkol", "kemangi", "cabai merah", "cabai rawit", "bawang merah", "bawang putih"],
+    cara: "Kukus/goreng tongkol lalu suwir-suwir. Tumis bumbu balado hingga matang harum, masukkan tongkol suwir dan daun kemangi di menit akhir."
+  },
+  {
+    nama: "Pindang Patin Kuah Segar",
+    bahan: ["ikan", "ikan patin", "kunyit", "serai", "belimbing wuluh", "cabai rawit", "daun salam"],
+    cara: "Rebus bumbu bakar/iris bersama air hingga wangi. Masukkan ikan patin dan belimbing wuluh, bumbui hingga asam pedas segar meresap."
+  },
+  {
+    nama: "Ikan Lele Goreng Kremes Sambal Lamongan",
+    bahan: ["ikan", "ikan lele", "tepung beras", "kemiri", "ketumbar", "cabai", "bawang putih"],
+    cara: "Bumbui lele dengan ketumbar bawang putih lalu goreng matang. Goreng sisa adonan bumbu bertepung untuk kremesan renyah."
+  },
+  {
+    nama: "Ikan Kembung Bakar Padang",
+    bahan: ["ikan", "ikan kembung", "santan", "kunyit", "cabai merah", "serai", "jahe"],
+    cara: "Lumuri ikan kembung dengan santan kental berbumbu pekat, bakar di teflon/arang sambil diolesi bumbu berulang hingga harum."
+  },
+  {
+    nama: "Ikan Cakalang Fufu Rica-Rica",
+    bahan: ["ikan", "ikan cakalang", "cabai rawit", "jahe", "daun jeruk", "serai", "bawang merah"],
+    cara: "Suwir kasar cakalang. Tumis bumbu rica ulek kasar dengan daun jeruk dan serai berlimpah hingga pedas berminyak, masukkan ikan."
+  },
+  {
+    nama: "Ikan Bandeng Presto Goreng Telur",
+    bahan: ["ikan", "ikan bandeng", "telur", "minyak goreng"],
+    cara: "Potong ikan bandeng presto yang sudah lunak durinya, celupkan ke kocokan telur berbumbu garam lada, goreng hingga keemasan."
+  },
+  {
+    nama: "Sup Ikan Salmon Kuah Bening",
+    bahan: ["ikan", "salmon", "jahe", "tomat", "bawang putih", "daun bawang", "kecap ikan"],
+    cara: "Tumis jahe dan bawang putih, masukkan air kaldu dan tomat. Masukkan potongan salmon, masak singkat 5 menit agar tekstur tetap lembut."
+  },
+
+  // --- ANEKA DAGING SAPI & KAMBING ---
+  {
+    nama: "Rendang Daging Sapi Empuk",
+    bahan: ["daging", "daging sapi", "santan", "kelapa parut", "cabai merah", "lengkuas", "serai", "bawang putih"],
+    cara: "Masak daging sapi bersama santan dan rempah komplit dengan api kecil secara perlahan hingga minyak keluar dan bumbu menghitam gurih."
+  },
+  {
+    nama: "Empal Gentong Daging Sapi",
+    bahan: ["daging", "daging sapi", "santan", "kunyit", "kemiri", "daun kucai", "bawang goreng"],
+    cara: "Rebus daging sapi hingga empuk lalu potong dadu. Masak kuah santan kuning berempah gurih, sajikan panas dengan taburan kucai."
+  },
+  {
+    nama: "Rawon Daging Sapi Gurih Hitam",
+    bahan: ["daging", "daging sapi", "kluwek", "bawang merah", "bawang putih", "serai", "tauge pendek"],
+    cara: "Tumis bumbu halus kluwek hitam legam hingga matang, masukkan ke rebusan daging sapi. Masak hingga meresap dan sajikan dengan sambal terasi."
+  },
+  {
+    nama: "Tumis Daging Sapi Lada Hitam",
+    bahan: ["daging", "daging sapi", "saus lada hitam", "paprika", "bawang bombay", "bawang putih", "saus tiram"],
+    cara: "Iris tipis daging sapi has dalam. Tumis bawang bombay, paprika, dan daging dengan saus lada hitam kental hingga harum dan empuk."
+  },
+  {
+    nama: "Semur Daging Sapi & Kentang",
+    bahan: ["daging", "daging sapi", "kentang", "kecap manis", "pala", "cengkeh", "bawang merah"],
+    cara: "Ungkep potongan daging sapi dan kentang dalam tumisan bumbu rempah pala dan kecap manis pekat sampai kuah mengental manis gurih."
+  },
+  {
+    nama: "Gulai Daging Kambing Rempah",
+    bahan: ["daging", "daging kambing", "santan", "kapulaga", "kayu manis", "kunyit", "cabai", "bawang putih"],
+    cara: "Tumis rempah gulai dan bumbu halus hingga sangat harum, masukkan potongan kambing, tuang santan dan masak hingga daging empuk tidak prengus."
+  },
+  {
+    nama: "Tongseng Daging Sapi / Kambing",
+    bahan: ["daging", "daging sapi", "daging kambing", "kol", "tomat", "cabai rawit", "kecap manis", "kuah gulai"],
+    cara: "Tumis potongan daging empuk bersama irisan kol, tomat, cabai rawit utuh, kecap manis, dan sedikit kuah santan hingga mendidih sedap."
+  },
+  {
+    nama: "Bola Daging Cincang Saus Tiram",
+    bahan: ["daging", "daging cincang", "daging sapi", "tepung tapioka", "saus tiram", "bawang bombay", "merica"],
+    cara: "Bentuk daging cincang berbumbu menjadi bola-bola kecil lalu goreng setengah matang. Masak bersama saus tiram dan bawang bombay."
+  },
+  {
+    nama: "Kornet Daging Sapi Goreng Telur",
+    bahan: ["daging", "kornet", "telur", "bawang bombay", "cabai merah", "merica"],
+    cara: "Campur kornet sapi dengan kocokan telur, irisan bombay, dan lada. Goreng dadar atau orak-arik hingga gurih wangi."
+  },
+
+  // --- ANEKA TELUR ---
   {
     nama: "Telur Balado Padang",
     bahan: ["telur", "cabai merah", "cabai rawit", "bawang merah", "bawang putih", "tomat"],
     cara: "Rebus telur lalu goreng berkulit. Tumis bumbu balado halus hingga matang dan berminyak, masukkan telur, aduk rata."
   },
   {
-    nama: "Nasi Goreng Telur Spesial",
-    bahan: ["nasi", "telur", "bawang merah", "bawang putih", "kecap manis", "cabai"],
-    cara: "Tumis bumbu halus, orak-arik telur, masukkan nasi putih dan kecap, aduk dengan api besar hingga harum."
-  },
-  {
     nama: "Telur Dadar Padang Tebal",
     bahan: ["telur", "daun bawang", "tepung beras", "cabai merah", "bawang merah"],
-    cara: "Kocok telur bersama irisan daun bawang, cabai, bumbu halus, dan tepung beras. Goreng dengan minyak banyak dan api sedang hingga matang merata."
+    cara: "Kocok telur bersama irisan daun bawang, cabai, bumbu halus, dan tepung beras. Goreng dengan minyak banyak dan api sedang hingga matang tebal."
   },
   {
     nama: "Telur Ceplok Kuah Kecap",
@@ -578,7 +667,7 @@ const resep = [
   {
     nama: "Tamagoyaki (Telur Gulung)",
     bahan: ["telur", "wortel", "daun bawang", "kecap asin", "gula"],
-    cara: "Kocok telur dengan sayuran cincang dan bumbu. Tuang sebagian ke wajan, gulung bertahap lapis demi lapis hingga matang."
+    cara: "Kocok telur dengan sayuran cincang dan bumbu. Tuang sebagian ke teflon, gulung bertahap lapis demi lapis hingga matang padat."
   },
   {
     nama: "Orak-Arik Telur Buncis",
@@ -591,88 +680,38 @@ const resep = [
     cara: "Rebus telur kupas bersama bumbu halus, gula merah, air kelapa, dan rempah sampai air menyusut dan warna cokelat meresap."
   },
   {
-    nama: "Gulai Telur Daun Singkong",
-    bahan: ["telur", "daun singkong", "santan", "kunyit", "bawang merah", "cabai"],
-    cara: "Rebus daun singkong hingga empuk. Masak santan bersama bumbu gulai, masukkan telur rebus dan daun singkong hingga mendidih matang."
-  },
-  {
-    nama: "Telur Kukus Lembut (Chawanmushi)",
-    bahan: ["telur", "kaldu", "kecap asin", "daun bawang", "jamur"],
-    cara: "Kocok telur bersama air kaldu lalu saring halus. Tuang ke mangkuk tahan panas, beri topping jamur, kukus api kecil 15 menit."
-  },
-  {
-    nama: "Egg Drop Soup Tomat",
-    bahan: ["telur", "tomat", "bawang putih", "minyak wijen", "daun bawang"],
-    cara: "Tumis tomat sampai layu berair, tambahkan kuah kaldu. Setelah mendidih, masukkan kocokan telur sambil diaduk membentuk serabut."
-  },
-  {
     nama: "Tahu Telur Bumbu Petis",
     bahan: ["tahu", "telur", "tauge", "kacang tanah", "petis", "kecap manis"],
     cara: "Kocok telur bersama potongan tahu lalu dadar hingga renyah. Sajikan bersama tauge dan siraman bumbu petis kacang."
   },
   {
-    nama: "Telur Bumbu Rujak Pedas",
-    bahan: ["telur", "cabai merah", "kemiri", "asam jawa", "gula merah", "santan"],
-    cara: "Goreng telur rebus sampai berkulit. Tumis bumbu rujak hingga harum, beri santan dan asam jawa, masak sampai kuah mengental."
-  },
-  {
     nama: "Martabak Telur Kulit Lumpia",
     bahan: ["telur", "kulit lumpia", "daun bawang", "bawang bombay", "merica"],
-    cara: "Kocok telur bersama irisan daun bawang banyak dan bumbu. Bungkus dalam kulit lumpia, langsung goreng hingga cokelat keemasan."
-  },
-  {
-    nama: "Telur Ceplok Balado Ijo",
-    bahan: ["telur", "cabai hijau", "cabai rawit hijau", "tomat hijau", "bawang merah"],
-    cara: "Goreng telur mata sapi. Tumis ulekan kasar cabai hijau dan tomat hijau hingga harum tidak langu, siram ke atas telur."
-  },
-  {
-    nama: "Semur Telur Tahu",
-    bahan: ["telur", "tahu", "kecap manis", "pala", "bawang merah", "bawang putih"],
-    cara: "Tumis bumbu semur, masukkan kecap manis, air, tahu goreng, dan telur rebus. Masak dengan api kecil sampai bumbu meresap gurih."
-  },
-  {
-    nama: "Telur Dadar Sayur Krispi",
-    bahan: ["telur", "kol", "wortel", "tepung bumbu", "bawang merah"],
-    cara: "Iris tipis kol dan wortel, campur ke dalam kocokan telur dan sedikit tepung bumbu. Goreng hingga krispi dan garing."
+    cara: "Kocok telur bersama irisan daun bawang banyak dan bumbu. Bungkus dalam kulit lumpia, langsung goreng renyah hingga keemasan."
   },
 
-  // --- Kategori Ayam, Daging & Ikan ---
+  // --- ANEKA AYAM ---
   {
     nama: "Ayam Kecap Mentega",
-    bahan: ["ayam", "mentega", "kecap manis", "bawang bombay", "bawang putih"],
-    cara: "Goreng ayam setengah matang. Tumis bawang bombay dengan mentega, masukkan kecap manis dan ayam, masak hingga saus mengental."
+    bahan: ["ayam", "daging ayam", "mentega", "kecap manis", "bawang bombay", "bawang putih"],
+    cara: "Goreng ayam setengah matang. Tumis bawang bombay dengan mentega, masukkan kecap manis dan ayam, masak hingga saus mengental gurih."
   },
   {
-    nama: "Ayam Goreng Lengkuas",
-    bahan: ["ayam", "lengkuas", "kunyit", "bawang putih", "serai"],
-    cara: "Ungkep ayam bersama parutan lengkuas banyak dan bumbu rempah. Tiriskan, lalu goreng ayam dan remahan lengkuas sampai garing."
+    nama: "Ayam Goreng Lengkuas Gurih",
+    bahan: ["ayam", "daging ayam", "lengkuas", "kunyit", "bawang putih", "serai"],
+    cara: "Ungkep ayam bersama parutan lengkuas banyak dan bumbu rempah. Tiriskan, lalu goreng ayam dan remahan lengkuas sampai garing renyah."
   },
   {
-    nama: "Opor Ayam Kuah Putih",
-    bahan: ["ayam", "santan", "ketumbar", "kemiri", "bawang putih", "serai"],
-    cara: "Tumis bumbu halus dan rempah aromatik, masukkan ayam dan santan encer. Masak hingga empuk lalu tuang santan kental hingga gurih."
-  },
-  {
-    nama: "Ikan Goreng Sambal Dabu-Dabu",
-    bahan: ["ikan", "bawang merah", "cabai rawit", "tomat", "jeruk nipis"],
-    cara: "Goreng ikan dengan taburan garam dan jeruk nipis. Iris cabai, bawang, tomat, siram minyak panas dan air jeruk nipis, sajikan di atas ikan."
-  },
-  {
-    nama: "Ikan Tongkol Balado",
-    bahan: ["ikan", "cabai merah", "bawang merah", "bawang putih", "tomat"],
-    cara: "Goreng tongkol sebentar agar tidak keras. Tumis sambal balado sampai matang, campurkan tongkol dan aduk rata."
+    nama: "Opor Ayam Kuah Santan",
+    bahan: ["ayam", "daging ayam", "santan", "ketumbar", "kemiri", "bawang putih", "serai"],
+    cara: "Tumis bumbu halus dan rempah aromatik, masukkan ayam dan santan encer. Masak hingga empuk lalu tuang santan kental hingga gurih matang."
   },
 
-  // --- Kategori Tempe, Tahu & Sayuran ---
+  // --- TAHU, TEMPE & SAYURAN ---
   {
     nama: "Orek Tempe Basah Manis",
     bahan: ["tempe", "bawang merah", "bawang putih", "cabai", "kecap manis"],
     cara: "Potong tempe dadu, goreng setengah matang. Tumis bumbu, beri air, kecap, dan garam, masukkan tempe hingga air meresap."
-  },
-  {
-    nama: "Kering Tempe Kacang Krispi",
-    bahan: ["tempe", "kacang tanah", "gula merah", "cabai merah", "asam jawa"],
-    cara: "Goreng tempe iris tipis dan kacang hingga sangat renyah. Masak air gula merah kental berserabut, matikan api lalu masukkan tempe dan kacang."
   },
   {
     nama: "Tahu Cabe Garam Krispi",
@@ -682,27 +721,12 @@ const resep = [
   {
     nama: "Tumis Kangkung Terasi Pedas",
     bahan: ["kangkung", "terasi", "cabai", "bawang merah", "bawang putih"],
-    cara: "Tumis bumbu halus dan terasi hingga harum wangi. Masukkan kangkung dengan api besar, aduk cepat selama 2 menit agar tetap hijau segar."
+    cara: "Tumis bumbu halus dan terasi hingga wangi. Masukkan kangkung dengan api besar, aduk cepat selama 2 menit agar tetap hijau segar."
   },
   {
     nama: "Sayur Bening Bayam Jagung",
     bahan: ["bayam", "jagung", "temu kunci", "bawang merah", "garam"],
-    cara: "Didihkan air bersama bawang merah iris dan temu kunci. Masukkan jagung manis hingga empuk, tambahkan bayam dan garam, matikan kompor."
-  },
-  {
-    nama: "Sayur Sop Bakso Komplit",
-    bahan: ["wortel", "kentang", "kol", "bakso", "bawang putih", "seledri"],
-    cara: "Tumis bawang putih halus, tuang ke rebusan air. Masukkan kentang, wortel, bakso, lalu terakhir kol dan seledri, bumbui lada garam."
-  },
-  {
-    nama: "Sayur Asem Segar Gurih",
-    bahan: ["labu siam", "kacang panjang", "jagung", "asam jawa", "cabai merah", "bawang merah"],
-    cara: "Rebus air bersama bumbu ulek dan asam jawa. Masukkan sayuran mulai dari yang keras hingga lunak, bumbui garam dan gula secukupnya."
-  },
-  {
-    nama: "Tumis Buncis Jagung Manis",
-    bahan: ["buncis", "jagung", "bawang putih", "bawang bombay", "saus tiram"],
-    cara: "Tumis bawang putih dan bombay, masukkan jagung pipil dan irisan buncis serong, beri saus tiram dan sedikit air, masak renyah."
+    cara: "Didihkan air bersama bawang merah iris dan temu kunci. Masukkan jagung manis hingga empuk, tambahkan bayam dan garam, angkat segera."
   }
 ];
 
@@ -717,13 +741,13 @@ function cariMasakan(){
     return;
   }
 
-  // Pecah query berdasarkan koma atau spasi
+  // Pecah query pencarian berdasarkan koma atau spasi ganda
   const keywords = rawInput
     .split(/[\s,]+/)
     .map(x => x.trim())
     .filter(x => x.length > 0);
 
-  // Pencarian fleksibel: substring check pada nama resep maupun daftar bahan
+  // Pencarian substring fleksibel di nama resep & array bahan
   const hasil = resep.filter(r => {
     if (!r || !Array.isArray(r.bahan)) return false;
     
@@ -742,7 +766,7 @@ function cariMasakan(){
       <div class="recipe" style="grid-column: 1 / -1; text-align: center;">
         😅 Belum menemukan masakan yang cocok dengan bahan tersebut.
         <br><br>
-        Coba masukkan bahan lain seperti: <i>telur, ayam, tahu, tempe, buncis</i>.
+        Coba masukkan bahan lain seperti: <i>ikan nila, daging sapi, telur, ayam, tongkol</i>.
       </div>`;
     return;
   }
@@ -784,7 +808,7 @@ function tampilMenu(){
       <b>${h}</b>
       <input
         value="${data[h] ? String(data[h]).replace(/"/g, '&quot;') : ""}"
-        placeholder="Contoh: Telur Dadar Padang + Sayur Bening"
+        placeholder="Contoh: Rendang Sapi + Sayur Bening"
         onchange="simpanMenu('${h}', this.value)"
       >
     </div>
