@@ -433,7 +433,7 @@ footer{
     <button class="close-btn" onclick="closePanels()">×</button>
     <h2>🥘 Mau Masak Apa?</h2>
 
-    <p>Masukkan bahan/jenis ikan apa saja (contoh: ikan gabus, bawal, cumi, sapi, tahu):</p>
+    <p>Masukkan bahan/jenis ikan apa saja (contoh: lele, ayam, gabus, sapi, cumi):</p>
 
     <input id="bahanInput"
            placeholder="Ketik bahan apa saja di sini...">
@@ -614,172 +614,212 @@ function closePanels(){
 
 
 /* =========================================
-   DATABASE MASTER RESEP UTAMA
+   DATABASE MASTER RESEP UTAMA (MINIMAL 5 VARIASI PER BAHAN UTAMA)
 ========================================= */
 const resepMaster = [
-  // --- ANEKA IKAN & SEAFOOD ---
+  // --- 1. ANEKA IKAN LELE (5 VARIASI) ---
   {
-    nama: "Gabus Pucung khas Betawi",
-    bahan: ["ikan gabus", "gabus", "pucung", "kluwek", "bawang merah", "bawang putih"],
-    detailBahan: "500gr ikan gabus segar, 4 buah kluwek/pucung, 6 bawang merah, 3 bawang putih, 2 cm kunyit, 2 cm jahe, 1 batang serai, 2 lembar daun salam.",
+    nama: "Pecel Lele Sambal Lamongan",
+    bahan: ["lele", "ikan lele"],
+    detailBahan: "500gr lele segar, 1 sdm jeruk nipis, 3 siung bawang putih, 2 cm kunyit, 1 sdt ketumbar, 10 cabai rawit, 2 tomat, 1 terasi bakar.",
     langkah: [
-      "Bersihkan ikan gabus dari sisik dan lendir, potong-potong lalu lumuri dengan jeruk nipis dan garam. Diamkan 15 menit.",
-      "Goreng ikan gabus sebentar hingga setengah berkulit agar tidak hancur saat dimasak kuah.",
-      "Haluskan kluwek/pucung, bawang merah, bawang putih, kunyit, jahe, dan kemiri.",
-      "Tumis bumbu halus bersama serai, daun salam, dan lengkuas hingga wangi pekat.",
-      "Tuangkan 800ml air, bumbui garam dan gula. Masukkan potongan ikan gabus, masak dengan api sedang hingga kuah meresap dan gurih."
+      "Bersihkan lele, lumuri jeruk nipis dan garam, marinasi bumbu halus bawang putih, kunyit, ketumbar.",
+      "Goreng lele dalam minyak panas hingga renyah garing keemasan.",
+      "Goreng cabai, bawang merah, dan tomat, lalu ulek bersama terasi bakar, gula merah, dan garam.",
+      "Sajikan lele goreng bersama ulekan sambal lamongan dan lalapan segar."
     ]
   },
   {
-    nama: "Ikan Nila Goreng Sambal Terasi",
-    bahan: ["ikan nila", "nila", "kunyit", "bawang putih", "terasi"],
-    detailBahan: "2 ekor ikan nila segar, 1 sdm air jeruk nipis, 3 siung bawang putih, 2 cm kunyit, 1 sdt ketumbar, garam, 10 cabai rawit, 1 buah terasi bakar.",
+    nama: "Mangut Lele Asap Khas Jogja",
+    bahan: ["lele", "ikan lele"],
+    detailBahan: "500gr lele (goreng/asap), 500ml santan, 5 bawang merah, 3 bawang putih, 3 kemiri, 2 cm kencur, 2 cm kunyit, cabai rawit utuh, daun kemangi.",
     langkah: [
-      "Bersihkan ikan nila, kerat badannya, lalu lumuri dengan air jeruk nipis dan garam.",
-      "Haluskan bawang putih, kunyit, ketumbar, dan garam. Balurkan rata ke seluruh tubuh ikan.",
-      "Goreng ikan dalam minyak panas hingga matang garing keemasan. Tiriskan.",
-      "Ulek cabai rawit, bawang merah, terasi bakar, tomat, dan sedikit gula garam hingga merata.",
-      "Sajikan ikan nila goreng renyah hangat bersama ulekan sambal terasi segar."
+      "Haluskan bawang merah, bawang putih, kemiri, kencur, kunyit, dan cabai.",
+      "Tumis bumbu halus bersama serai, daun salam, dan lengkuas hingga matang harum.",
+      "Tuang santan, aduk rata hingga mendidih agar santan tidak pecah.",
+      "Masukkan lele goreng/asap dan cabai rawit utuh. Bumbui garam dan gula merah.",
+      "Masak dengan api kecil hingga kuah meresap, taburi daun kemangi sebelum diangkat."
     ]
   },
   {
-    nama: "Ikan Gurame Asam Manis",
-    bahan: ["ikan gurame", "gurame", "gurami", "saus tomat", "bawang bombay", "nanas"],
-    detailBahan: "1 ekor ikan gurame (fillet/utuh), 100gr tepung terigu, 2 sdm maizena, 1/2 buah nanas potong, 1/2 wortel, 4 sdm saus tomat.",
+    nama: "Lele Bumbu RW Pedas Kemangi",
+    bahan: ["lele", "ikan lele"],
+    detailBahan: "500gr lele, 10 cabai rawit hijau, 5 cabai merah, 6 bawang merah, 3 bawang putih, 2 cm jahe, 2 batang serai (iris halus), daun kemangi.",
     langkah: [
-      "Balur potongan gurame dengan kocokan telur lalu gulingkan ke campuran tepung terigu dan maizena.",
-      "Goreng dalam minyak panas hingga berwarna kuning keemasan dan krispi.",
-      "Tumis bawang putih cincang dan bawang bombay hingga harum. Masukkan wortel dan nanas.",
-      "Tambahkan saus tomat, saus tiram, sedikit gula, garam, dan air. Aduk hingga mendidih.",
-      "Tuangkan larutan maizena sedikit demi sedikit hingga saus mengental, lalu siramkan di atas gurame."
+      "Goreng lele hingga setengah garing, tiriskan.",
+      "Haluskan kasar cabai, bawang, jahe, dan serai iris.",
+      "Tumis bumbu halus dengan minyak secukupnya hingga wangi dan matang.",
+      "Masukkan lele, beri sedikit air, garam, dan kaldu bubuk.",
+      "Aduk hingga bumbu menempel erat pada lele, tambahkan kemangi lalu sajikan."
     ]
   },
   {
-    nama: "Ikan Tongkol Suwir Balado Kemangi",
-    bahan: ["ikan tongkol", "tongkol", "kemangi", "cabai merah", "cabai rawit"],
-    detailBahan: "300gr tongkol cue/pindang, 1 genggam kemangi segar, 8 cabai merah keriting, 5 cabai rawit, 5 bawang merah, 2 bawang putih.",
+    nama: "Lele Srepeh Bumbu Santan Merah",
+    bahan: ["lele", "ikan lele"],
+    detailBahan: "500gr lele, 400ml santan sedang, 5 cabai merah keriting, 4 bawang merah, 2 bawang putih, 2 kemiri, 1 sdt air asam jawa.",
     langkah: [
-      "Goreng ikan tongkol sebentar agar tidak amis, lalu suwir-suwir dagingnya kasar.",
-      "Haluskan cabai merah, cabai rawit, bawang merah, dan bawang putih.",
-      "Tumis bumbu halus bersama daun jeruk hingga matang harum.",
-      "Masukkan suwiran tongkol, bumbui dengan garam, gula, dan kaldu bubuk.",
-      "Sesaat sebelum diangkat, masukkan daun kemangi, aduk sebentar hingga layu lalu sajikan."
+      "Lumuri lele dengan garam dan air jeruk nipis, panggang/goreng hingga matang.",
+      "Haluskan cabai merah, bawang merah, bawang putih, dan kemiri.",
+      "Rebus santan bersama bumbu halus dan air asam jawa hingga mengental kental berminyak.",
+      "Bumbui dengan gula merah dan garam.",
+      "Penyajian: tata lele di piring lalu siram dengan kuah santan merah gurih."
     ]
   },
   {
-    nama: "Pindang Patin Kuah Segar",
-    bahan: ["ikan patin", "patin", "kunyit", "serai", "belimbing wuluh"],
-    detailBahan: "500gr ikan patin, 4 belimbing wuluh (iris), 2 batang serai, 3 cm kunyit bakar, 3 cm jahe, 5 cabai rawit utuh.",
+    nama: "Lele Goreng Tepung Asam Manis",
+    bahan: ["lele", "ikan lele"],
+    detailBahan: "500gr fillet lele (potong dadu), 100gr tepung terigu, 2 sdm maizena, 1/2 bawang bombay, 3 sdm saus tomat, 1 sdm saus sambal, 1/2 nanas.",
     langkah: [
-      "Cuci bersih ikan patin, lumuri jeruk nipis 10 menit lalu bilas bersih.",
-      "Didihkan 800ml air. Masukkan kunyit, jahe, serai, daun salam, dan lengkuas.",
-      "Setelah mendidih dan harum, masukkan potongan ikan patin dan cabai rawit utuh.",
-      "Tambahkan irisan belimbing wuluh, garam, gula pasir, dan sedikit kecap ikan.",
-      "Masak hingga ikan matang lembut, matikan api lalu taburi daun kemangi."
-    ]
-  },
-  {
-    nama: "Ikan Lele Goreng Kremes Sambal Lamongan",
-    bahan: ["ikan lele", "lele", "tepung beras", "kemiri", "ketumbar"],
-    detailBahan: "500gr ikan lele segar, 1 sdm air jeruk nipis, 3 siung bawang putih, 1 sdt ketumbar, 2 cm kunyit.",
-    langkah: [
-      "Bersihkan lele, marinasi dengan jeruk nipis dan garam.",
-      "Haluskan bawang putih, kunyit, ketumbar, dan garam. Lumuri ke ikan lele, simpan 15 menit.",
-      "Goreng lele dalam minyak panas dan banyak hingga garing keemasan.",
-      "Goreng adonan tepung kremesan hingga bersarang renyah.",
-      "Sajikan lele goreng bersama taburan kremesan dan sambal terasi lamongan."
-    ]
-  },
-  {
-    nama: "Cumi Goreng Tepung Krispi",
-    bahan: ["cumi", "seafood", "tepung terigu", "tepung maizena", "bawang putih"],
-    detailBahan: "500gr cumi segar (potong cincin), 1 sdt air jeruk nipis, 150gr tepung terigu, 50gr maizena, 1 sdt lada bubuk.",
-    langkah: [
-      "Lumuri cumi dengan jeruk nipis, garam, dan lada. Simpan di kulkas selama 15 menit.",
-      "Campurkan tepung terigu, maizena, baking powder, bawang putih bubuk, garam, dan lada.",
-      "Celupkan cumi ke adonan basah, lalu gulingkan ke adonan tepung kering.",
-      "Goreng cumi dalam minyak panas banyak dengan api sedang-besar hingga renyah keemasan."
-    ]
-  },
-  {
-    nama: "Udang Saus Tiram Bawang Bombay",
-    bahan: ["udang", "seafood", "saus tiram", "bawang bombay", "bawang putih"],
-    detailBahan: "350gr udang kupas, 1/2 bawang bombay, 3 siung bawang putih, 2 sdm saus tiram, 1 sdm kecap manis.",
-    langkah: [
-      "Bersihkan udang, belah punggungnya dan buang kotorannya.",
-      "Tumis bawang putih cincang dan bawang bombay iris hingga harum.",
-      "Masukkan udang, aduk cepat hingga warna udang berubah menjadi kemerahan.",
-      "Bubuhi saus tiram, kecap manis, garam, lada, dan sedikit air. Masak hingga mengental.",
-      "Siram minyak wijen dan irisan daun bawang di akhir memasak, aduk rata lalu angkat."
+      "Balur fillet lele dengan tepung terigu dan maizena basah-kering, goreng hingga krispi.",
+      "Tumis bawang bombay dan bawang putih cincang hingga wangi.",
+      "Masukkan saus tomat, saus sambal, gula, dan potongan nanas.",
+      "Tuang sedikit larutan maizena hingga saus mengental.",
+      "Campurkan lele goreng krispi ke dalam saus atau disiram di atasnya."
     ]
   },
 
-  // --- ANEKA DAGING SAPI & KAMBING ---
-  {
-    nama: "Rendang Daging Sapi Empuk",
-    bahan: ["daging sapi", "sapi", "santan", "kelapa parut", "cabai merah"],
-    detailBahan: "500gr daging sapi, 1 liter santan kental, 500ml santan encer, 100gr kelapa parut sangrai, rempah rendang lengkap.",
-    langkah: [
-      "Haluskan cabai, bawang merah, bawang putih, jahe, kunyit, dan kemiri.",
-      "Didihkan santan encer bersama bumbu halus, serai, daun jeruk, dan daun kunyit.",
-      "Masukkan potongan daging sapi, aduk perlahan dengan api sedang hingga santan menyusut.",
-      "Tuang santan kental dan kelapa parut sangrai. Kecilkan api, masak terus sambil diaduk sesekali.",
-      "Masak selama 3-4 jam hingga minyak keluar dan bumbu berubah kecokelatan meresap."
-    ]
-  },
-
-  // --- ANEKA AYAM & LAINNYA ---
+  // --- 2. ANEKA AYAM (5 VARIASI) ---
   {
     nama: "Ayam Goreng Lengkuas Gurih",
-    bahan: ["daging ayam", "ayam", "lengkuas", "kunyit", "bawang putih"],
-    detailBahan: "1 ekor ayam (potong 8), 200gr lengkuas parut halus, 5 siung bawang putih, 3 cm kunyit, 3 kemiri, 2 batang serai.",
+    bahan: ["ayam", "daging ayam"],
+    detailBahan: "1 ekor ayam, 200gr lengkuas parut, 5 bawang putih, 3 cm kunyit, 3 kemiri, 2 serai.",
     langkah: [
-      "Haluskan bawang putih, kunyit, kemiri, ketumbar, dan garam.",
-      "Campurkan potongan ayam, bumbu halus, dan parutan lengkuas melimpah ke dalam wajan.",
-      "Ungkep dengan api sedang hingga air menyusut.",
-      "Goreng ayam dalam minyak panas hingga kuning keemasan, angkat.",
-      "Goreng sisa bumbu parutan lengkuas hingga garing kecokelatan. Taburkan di atas ayam."
+      "Ungkep potongan ayam bersama parutan lengkuas dan bumbu halus hingga air menyusut.",
+      "Goreng ayam dalam minyak panas hingga kuning keemasan.",
+      "Goreng sisa bumbu parutan lengkuas hingga renyah garing kecokelatan.",
+      "Taburkan kremesan lengkuas di atas ayam goreng hangat."
+    ]
+  },
+  {
+    nama: "Ayam Woku Pedas khas Manado",
+    bahan: ["ayam", "daging ayam"],
+    detailBahan: "500gr ayam, 10 cabai rawit, 5 cabai merah, 6 bawang merah, 3 bawang putih, 2 batang serai, daun jeruk, daun pandan, kemangi.",
+    langkah: [
+      "Tumis bumbu halus bersama serai, daun jeruk, dan irisan daun pandan hingga harum.",
+      "Masukkan potongan ayam, aduk hingga berubah warna.",
+      "Tuangkan air secukupnya, bumbui garam, gula, dan perasan jeruk nipis.",
+      "Masak hingga kuah menyusut dan meresap, masukkan kemangi sebelum diangkat."
+    ]
+  },
+  {
+    nama: "Ayam Kecap Mentega Gurih",
+    bahan: ["ayam", "daging ayam"],
+    detailBahan: "500gr ayam, 3 sdm mentega/margarin, 1/2 bawang bombay, 3 siung bawang putih, 3 sdm kecap manis, 1 sdm saus tiram, 1 sdt kecap inggris.",
+    langkah: [
+      "Goreng ayam hingga setengah matang/berkulit kecokelatan.",
+      "Lelehkan mentega, tumis bawang bombay dan bawang putih hingga harum.",
+      "Masukkan kecap manis, saus tiram, kecap inggris, dan sedikit air.",
+      "Masukkan ayam goreng, aduk rata hingga bumbu meresap dan mengental karamel."
+    ]
+  },
+  {
+    nama: "Ayam Bakar Bumbu Rujak",
+    bahan: ["ayam", "daging ayam"],
+    detailBahan: "1 ekor ayam, 300ml santan, 8 cabai merah, 6 bawang merah, 3 bawang putih, 3 kemiri, 2 cm jahe, 1 sdm gula merah, 1 sdm air asam jawa.",
+    langkah: [
+      "Tumis bumbu halus hingga harum matang.",
+      "Masukkan potongan ayam, aduk hingga kaku.",
+      "Tuang santan, gula merah, dan air asam jawa. Masak hingga kuah menyusut pekat.",
+      "Panggang ayam di atas teflon/arang sambil diolesi sisa bumbu hingga harum karamel."
+    ]
+  },
+  {
+    nama: "Opor Ayam Kuning Spesial",
+    bahan: ["ayam", "daging ayam"],
+    detailBahan: "1 ekor ayam, 700ml santan, 8 bawang merah, 4 bawang putih, 4 kemiri, 3 cm kunyit, 1 sdt ketumbar, 2 serai, daun salam, jintan.",
+    langkah: [
+      "Haluskan bawang merah, bawang putih, kunyit, kemiri, ketumbar, dan jintan.",
+      "Tumis bumbu halus bersama serai, daun salam, dan lengkuas hingga matang.",
+      "Masukkan potongan ayam, aduk hingga berubah warna.",
+      "Tuang santan encer lalu santan kental, aduk berkala dengan api kecil hingga ayam empuk gurih."
+    ]
+  },
+
+  // --- 3. ANEKA IKAN GABUS (5 VARIASI) ---
+  {
+    nama: "Gabus Pucung khas Betawi",
+    bahan: ["gabus", "ikan gabus"],
+    detailBahan: "500gr ikan gabus, 4 buah kluwek/pucung, 6 bawang merah, 3 bawang putih, 2 cm kunyit, 2 cm jahe, 1 batang serai.",
+    langkah: [
+      "Bersihkan ikan gabus, potong-potong lalu goreng setengah matang.",
+      "Haluskan kluwek, bawang merah, bawang putih, kunyit, dan jahe.",
+      "Tumis bumbu halus bersama serai dan daun salam hingga harum.",
+      "Tuang 800ml air, beri garam dan gula, masukkan gabus, masak hingga kuah pekat meresap."
+    ]
+  },
+  {
+    nama: "Sup Ikan Gabus Bening Rempah",
+    bahan: ["gabus", "ikan gabus"],
+    detailBahan: "500gr gabus, 2 cm jahe (geprek), 3 siung bawang putih (iris), 1 batang serai, 1 lembar daun kunyit, 1 buah tomat hijau, daun kemangi.",
+    langkah: [
+      "Didihkan 1 liter air bersama jahe, bawang putih tumis, serai, dan daun kunyit.",
+      "Masukkan potongan ikan gabus segar dan cabai rawit utuh.",
+      "Bumbui dengan garam, lada, dan sedikit perasan jeruk nipis.",
+      "Tambahkan irisan tomat hijau dan kemangi sesaat sebelum diangkat."
+    ]
+  },
+  {
+    nama: "Gabus Balado Cabai Hijau",
+    bahan: ["gabus", "ikan gabus"],
+    detailBahan: "500gr ikan gabus, 10 cabai hijau besar, 10 cabai rawit hijau, 6 bawang merah, 2 bawang putih, 1 tomat hijau, jeruk nipis.",
+    langkah: [
+      "Goreng ikan gabus hingga garing renyah.",
+      "Kukus/rebus sebentar cabai hijau, bawang merah, dan tomat hijau lalu ulek kasar.",
+      "Tumis sambal hijau dengan minyak panas, bumbui garam, gula, dan perasan jeruk nipis.",
+      "Campurkan gabus goreng garing ke dalam balado hijau, aduk rata."
+    ]
+  },
+  {
+    nama: "Gabus Asam Pedas khas Melayu",
+    bahan: ["gabus", "ikan gabus"],
+    detailBahan: "500gr gabus, 8 cabai merah keriting, 5 bawang merah, 3 bawang putih, 2 cm kunyit, 2 cm jahe, 2 sdm air asam jawa, daun kesum/kemangi.",
+    langkah: [
+      "Haluskan cabai, bawang merah, bawang putih, kunyit, dan jahe.",
+      "Didihkan air bersama bumbu halus, serai, dan air asam jawa.",
+      "Masukkan potongan gabus segar, masak hingga daging ikan matang lembut.",
+      "Bumbui garam dan sedikit gula, sajikan hangat berkuah segar."
+    ]
+  },
+  {
+    nama: "Penyetan Gabus Sambal Terasi Pedas",
+    bahan: ["gabus", "ikan gabus"],
+    detailBahan: "500gr gabus, 2 cm kunyit, 3 bawang putih, 1 sdt ketumbar, 10 cabai rawit, 1 terasi bakar, 1 tomat.",
+    langkah: [
+      "Marinasi gabus dengan ketumbar, kunyit, bawang putih, dan garam. Goreng kering.",
+      "Ulek cabai rawit, bawang merah, tomat goreng, dan terasi bakar hingga halus merata.",
+      "Penyet ikan gabus goreng panas di atas cobek berisi sambal terasi."
     ]
   }
 ];
 
 
 /* =========================================
-   SISTEM GENERASI RESEP DINAMIS (PENGHASIL RESEP SPESIFIK)
+   GENERATOR RESEP DINAMIS DENGAN KECUKUPAN VARIASI (MINIMAL 5)
 ========================================= */
 function kapitalisasiKata(str) {
   return str.replace(/\b\w/g, c => c.toUpperCase());
 }
 
-function generasikanResepDinamis(bahanInput) {
+function generasikanResepDinamisLengkap(bahanInput, variasiEksis = []) {
   const kata = bahanInput.toLowerCase().replace(/masak|resep|cara/g, "").trim();
   const namaBahan = kapitalisasiKata(kata);
   
-  const kataKunciIkan = ["ikan", "gabus", "bawal", "gurame", "kakap", "tenggiri", "dori", "salmon", "tuna", "mujair", "kembung", "siakap", "selar", "layang", "teri", "pari", "bandeng", "belut", "sidat", "lobster", "kepiting", "kerang", "udang", "cumi"];
+  const kataKunciIkan = ["ikan", "gabus", "lele", "bawal", "gurame", "kakap", "tenggiri", "dori", "salmon", "tuna", "mujair", "kembung", "siakap", "selar", "layang", "teri", "pari", "bandeng", "belut", "sidat", "lobster", "kepiting", "kerang", "udang", "cumi"];
   const apakahIkan = kataKunciIkan.some(k => kata.includes(k));
 
+  let kumpulanDinamis = [];
+
   if (apakahIkan) {
-    return [
-      {
-        nama: `${namaBahan} Kuah Pucung / Kluwek Khas Nusantara`,
-        detailBahan: `500gr ${kata}, 3 buah kluwek (ambil isinya), 5 siung bawang merah, 3 siung bawang putih, 2 cm kunyit, 2 cm jahe, 1 batang serai, 2 lembar daun salam, garam & gula.`,
-        langkah: [
-          `Bersihkan ${kata}, buang kotoran dan sisiknya, potong-potong lalu marinasi dengan air jeruk nipis dan sedikit garam selama 15 menit.`,
-          `Goreng ${kata} sebentar hingga permukaannya berkulit lunak agar tidak mudah hancur saat dikuahi.`,
-          "Haluskan kluwek, bawang merah, bawang putih, kunyit, jahe, dan kemiri.",
-          "Tumis bumbu halus bersama serai geprek, daun salam, dan lengkuas hingga matang harum dan berminyak.",
-          `Tuangkan 800ml air, biarkan mendidih lalu masukkan ${kata}. Bumbui garam dan gula secukupnya, masak dengan api kecil hingga kuah gurih meresap.`
-        ]
-      },
+    kumpulanDinamis = [
       {
         nama: `${namaBahan} Bakar Bumbu Jimbaran`,
         detailBahan: `500gr ${kata}, 1 sdm air jeruk nipis, 5 siung bawang merah, 3 siung bawang putih, 3 kemiri sangrai, 2 sdm saus tomat, 1 sdm saus tiram, 1 sdm kecap manis, margarin.`,
         langkah: [
-          `Bersihkan ${kata}, belah atau kerat-kerat badannya, lalu marinasi dengan jeruk nipis dan garam.`,
+          `Bersihkan ${kata}, belah atau kerat badannya, lalu marinasi dengan jeruk nipis dan garam.`,
           "Haluskan bawang merah, bawang putih, kemiri, cabai, dan kunyit. Tumis hingga wangi.",
           "Campurkan bumbu tumis dengan saus tomat, saus tiram, kecap manis, dan margarin cair.",
           `Olesi seluruh permukaan ${kata} dengan bumbu olesan secara merata.`,
-          `Panggang ${kata} di atas wajan teflon atau panggangan arang sambil terus dibalik dan diolesi sisa bumbu hingga harum matang meresap.`
+          `Panggang ${kata} di atas teflon atau panggangan arang sambil dibalik dan diolesi sisa bumbu.`
         ]
       },
       {
@@ -789,42 +829,116 @@ function generasikanResepDinamis(bahanInput) {
           `Cuci bersih ${kata}, potong sesuai selera dan baluri sedikit perasan jeruk nipis.`,
           "Rebus 800ml air hingga mendidih, masukkan irisan kunyit, jahe, serai geprek, dan daun jeruk.",
           `Masukkan potongan ${kata} dan cabai rawit utuh ke dalam air rebusan berempah.`,
-          "Bumbui dengan garam, sedikit gula, dan irisan belimbing wuluh/tomat hijau untuk rasa asam segar.",
+          "Bumbui garam, gula, dan irisan belimbing wuluh/tomat hijau untuk rasa asam segar.",
           `Masak hingga ${kata} matang lembut, matikan api lalu taburi daun kemangi segar.`
+        ]
+      },
+      {
+        nama: `${namaBahan} Goreng Krispi Saus Tiram`,
+        detailBahan: `500gr ${kata}, 100gr tepung terigu, 2 sdm maizena, 1/2 bawang bombay, 3 siung bawang putih, 2 sdm saus tiram, 1 sdm kecap manis.`,
+        langkah: [
+          `Potong-potong ${kata}, lumuri tepung basah dan tepung kering, lalu goreng hingga garing renyah.`,
+          "Tumis bawang putih cincang dan bawang bombay iris hingga harum.",
+          "Masukkan saus tiram, kecap manis, garam, lada, dan sedikit air.",
+          `Siramkan saus tiram hangat di atas ${kata} goreng krispi.`
+        ]
+      },
+      {
+        nama: `${namaBahan} Pesmol Bumbu Kuning`,
+        detailBahan: `500gr ${kata}, 6 bawang merah, 3 bawang putih, 4 cm kunyit, 3 kemiri, 2 cabai merah, 1 lembar daun salam, 1 sdt cuka/jeruk nipis.`,
+        langkah: [
+          `Goreng ${kata} hingga matang kecokelatan, tiriskan.`,
+          "Haluskan bawang merah, bawang putih, kunyit, dan kemiri.",
+          "Tumis bumbu halus hingga wangi pekat, beri sedikit air, garam, dan gula.",
+          `Masukkan ${kata} goreng dan cabai rawit utuh, aduk hingga bumbu kuning meresap mengental.`
+        ]
+      },
+      {
+        nama: `Penyet ${namaBahan} Sambal Bawang Terasi`,
+        detailBahan: `500gr ${kata}, 1 sdm jeruk nipis, 15 cabai rawit merah, 5 siung bawang merah, 1 siung bawang putih, 1 sdt terasi goreng, minyak panas.`,
+        langkah: [
+          `Goreng ${kata} hingga garing matang.`,
+          "Ulek kasar cabai rawit, bawang merah, bawang putih, terasi, garam, dan sedikit gula.",
+          "Siram sambal ulek dengan 2 sdm minyak goreng panas bekas menggoreng ikan.",
+          `Penyet ${kata} di atas sambal ulek panas.`
+        ]
+      },
+      {
+        nama: `${namaBahan} Kuah Pucung / Kluwek Gurih`,
+        detailBahan: `500gr ${kata}, 3 buah kluwek, 5 bawang merah, 3 bawang putih, 2 cm kunyit, 2 cm jahe, 1 batang serai, garam & gula.`,
+        langkah: [
+          `Bersihkan ${kata}, potong-potong lalu goreng setengah matang.`,
+          "Haluskan kluwek, bawang merah, bawang putih, kunyit, dan jahe.",
+          "Tumis bumbu halus bersama serai dan daun salam hingga harum.",
+          `Tuang 800ml air, masukkan ${kata}, masak hingga kuah pekat meresap.`
         ]
       }
     ];
   } else {
-    return [
+    kumpulanDinamis = [
       {
         nama: `Tumis ${namaBahan} Saus Tiram Bawang Putih`,
-        detailBahan: `300gr ${kata}, 4 siung bawang putih (cincang), 1/2 bawang bombay, 2 sdm saus tiram, 1 sdm kecap manis, 1 sdt minyak wijen, garam & lada.`,
+        detailBahan: `300gr ${kata}, 4 siung bawang putih, 1/2 bawang bombay, 2 sdm saus tiram, 1 sdm kecap manis, 1 sdt minyak wijen, garam & lada.`,
         langkah: [
           `Bersihkan dan potong-potong ${kata} sesuai selera.`,
-          "Panaskan minyak, tumis bawang putih cincang dan bawang bombay hingga wangi beraroma.",
-          `Masukkan potongan ${kata}, aduk rata bersama tumisan bawang.`,
+          "Tumis bawang putih cincang dan bawang bombay hingga wangi.",
+          `Masukkan potongan ${kata}, aduk rata bersama tumisan.`,
           "Bubuhi saus tiram, kecap manis, garam, lada bubuk, dan sedikit air.",
-          "Masak hingga bumbu meresap kental dan bahan matang sempurna, beri minyak wijen sebelum diangkat."
+          "Masak hingga bumbu meresap kental dan matang sempurna."
         ]
       },
       {
         nama: `${namaBahan} Balado Pedas Manis`,
-        detailBahan: `300gr ${kata}, 8 cabai merah keriting, 5 cabai rawit, 5 siung bawang merah, 2 siung bawang putih, 1 buah tomat, garam & gula pasir.`,
+        detailBahan: `300gr ${kata}, 8 cabai merah keriting, 5 cabai rawit, 5 bawang merah, 2 bawang putih, 1 tomat, garam & gula.`,
         langkah: [
-          `Goreng atau tumis sebentar ${kata} hingga setengah matang/matang, lalu tiriskan.`,
-          "Ulek atau haluskan cabai merah, cabai rawit, bawang merah, bawang putih, dan tomat.",
-          "Tumis bumbu halus balado dengan minyak secukupnya hingga wangi dan matang berminyak.",
-          "Bumbui dengan garam, gula pasir, dan sedikit kaldu bubuk.",
-          `Masukkan ${kata}, aduk rata hingga seluruh bagian terselimuti bumbu balado.`
+          `Goreng atau tumis sebentar ${kata} hingga matang, tiriskan.`,
+          "Haluskan cabai merah, cabai rawit, bawang merah, bawang putih, dan tomat.",
+          "Tumis bumbu halus balado hingga wangi berminyak.",
+          `Masukkan ${kata}, aduk rata hingga terselimuti bumbu balado.`
+        ]
+      },
+      {
+        nama: `${namaBahan} Goreng Mentega Gurih`,
+        detailBahan: `400gr ${kata}, 3 sdm mentega, 1/2 bawang bombay, 2 siung bawang putih, 2 sdm kecap manis, 1 sdm saus tiram.`,
+        langkah: [
+          `Goreng ${kata} hingga matang kecokelatan.`,
+          "Lelehkan mentega, tumis bawang putih dan bawang bombay hingga harum.",
+          "Masukkan kecap manis, saus tiram, dan sedikit air.",
+          `Masukkan ${kata}, aduk cepat hingga bumbu mentega meresap.`
+        ]
+      },
+      {
+        nama: `${namaBahan} Bumbu Lada Hitam`,
+        detailBahan: `400gr ${kata}, 1 sdm lada hitam tumbuk kasar, 1/2 paprika/cabai hijau, 1/2 bawang bombay, 2 sdm saus tiram, 1 sdm kecap manis.`,
+        langkah: [
+          `Potong-potong ${kata}, tumis hingga matang.`,
+          "Tumis bawang bombay, bawang putih, dan lada hitam kasar hingga harum wangi.",
+          "Masukkan saus tiram, kecap manis, dan irisan paprika/cabai hijau.",
+          `Masukkan ${kata}, aduk rata hingga saus lada hitam melapisinya.`
+        ]
+      },
+      {
+        nama: `${namaBahan} Kuah Sup Rempah Bening`,
+        detailBahan: `400gr ${kata}, 2 buah wortel, 3 siung bawang putih, 1/2 sdt lada bubuk, 1 batang daun bawang, 1 batang seledri, garam & kaldu.`,
+        langkah: [
+          "Didihkan 1 liter air dalam panci.",
+          "Tumis bawang putih cincang hingga harum, masukkan ke dalam air mendidih.",
+          `Masukkan ${kata} dan potongan wortel, masak hingga empuk.`,
+          "Bumbui garam, lada bubuk, dan kaldu bubuk.",
+          "Taburi irisan daun bawang dan seledri sebelum disajikan."
         ]
       }
     ];
   }
+
+  // Saring agar tidak ada nama masakan yang ganda
+  const namaEksis = new Set(variasiEksis.map(v => v.nama.toLowerCase()));
+  return kumpulanDinamis.filter(d => !namaEksis.has(d.nama.toLowerCase()));
 }
 
 
 /* =========================================
-   PENCARIAN MASAKAN DENGAN AKURASI SPESIFIK
+   PENCARIAN MASAKAN DENGAN GARANSI MINIMAL 5 VARIASI
 ========================================= */
 function cariMasakan(){
   const inputEl = document.getElementById("bahanInput");
@@ -837,26 +951,24 @@ function cariMasakan(){
     return;
   }
 
-  // Bersihkan kata umum
   const cleanedInput = rawInput.replace(/masak|resep|cara/g, "").trim();
 
-  // Cari di database master secara persis & spesifik
+  // 1. Cari di database master
   let hasil = resepMaster.filter(r => {
     if (!r || !Array.isArray(r.bahan)) return false;
-    
-    // Cek apakah ada kecocokan bahan spesifik (seperti "ikan gabus" atau "gabus")
     return r.bahan.some(b => {
       const bLower = b.toLowerCase();
       return cleanedInput.includes(bLower) || bLower.includes(cleanedInput);
     }) || r.nama.toLowerCase().includes(cleanedInput);
   });
 
-  // Jika kata dasar generik seperti "ikan", saring agar tidak mencampur spesifik bahan unik
-  // Jika tidak ditemukan resep yang benar-benar cocok di database statis, buatkan resep racikan otomatis
-  if (hasil.length === 0) {
-    hasil = generasikanResepDinamis(cleanedInput);
+  // 2. Jika kurang dari 5 variasi, lengkapi dengan generator dinamis
+  if (hasil.length < 5) {
+    const tambahanDinamis = generasikanResepDinamisLengkap(cleanedInput, hasil);
+    hasil = hasil.concat(tambahanDinamis);
   }
 
+  // Batasi atau pastikan variasi melimpah
   const box = document.getElementById("hasilMasakan");
   if(!box) return;
 
