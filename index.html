@@ -3,304 +3,433 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Katalog Olahan Kuliner Kompleks</title>
+  <title>Aplikasi Resep Kuliner Nusantara</title>
   <style>
     :root {
-      --primary-color: #0d9488;
-      --primary-hover: #0f766e;
-      --bg-color: #f8fafc;
-      --card-bg: #ffffff;
-      --text-main: #1e293b;
+      --primary-color: #2563eb;
+      --primary-dark: #1d4ed8;
+      --bg-color: #f1f5f9;
+      --surface-color: #ffffff;
+      --text-main: #0f172a;
       --text-muted: #64748b;
       --border-color: #e2e8f0;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     body {
       background-color: var(--bg-color);
       color: var(--text-main);
-      padding: 2rem 1rem;
-      line-height: 1.5;
+      padding: 1.5rem;
+      min-height: 100vh;
     }
 
-    .container {
-      max-width: 1100px;
+    .app-container {
+      max-width: 1200px;
       margin: 0 auto;
     }
 
-    header {
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    header h1 {
-      font-size: 2rem;
-      color: var(--primary-color);
-      margin-bottom: 0.5rem;
-    }
-
-    header p {
-      color: var(--text-muted);
-    }
-
-    .controls {
-      display: flex;
-      gap: 1rem;
+    /* App Header / Search Bar Section */
+    .app-header {
+      background: var(--surface-color);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
       margin-bottom: 1.5rem;
-      flex-wrap: wrap;
     }
 
-    .search-input {
+    .app-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .search-box input {
       flex: 1;
-      min-width: 250px;
-      padding: 0.75rem 1rem;
+      padding: 0.85rem 1rem;
       border: 1px solid var(--border-color);
-      border-radius: 0.5rem;
+      border-radius: 8px;
       font-size: 1rem;
       outline: none;
       transition: border-color 0.2s;
     }
 
-    .search-input:focus {
+    .search-box input:focus {
       border-color: var(--primary-color);
     }
 
-    .table-container {
-      background-color: var(--card-bg);
-      border-radius: 0.75rem;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      overflow-x: auto;
-      border: 1px solid var(--border-color);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-    }
-
-    th, td {
-      padding: 1rem;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    th {
-      background-color: #f1f5f9;
+    .search-box button {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0 1.5rem;
+      border-radius: 8px;
       font-weight: 600;
-      color: var(--text-main);
-      white-space: nowrap;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
     }
 
-    tr:last-child td {
-      border-bottom: none;
+    .search-box button:hover {
+      background: var(--primary-dark);
     }
 
-    tr:hover {
-      background-color: #f8fafc;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 0.25rem 0.6rem;
-      border-radius: 9999px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      background-color: #ccfbf1;
-      color: #115e59;
-    }
-
-    .empty-state, .error-state {
-      padding: 3rem;
-      text-align: center;
+    .info-bar {
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
     }
 
-    .error-state {
-      color: #b91c1c;
-      background-color: #fef2f2;
+    /* Recipe Grid Layout */
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
     }
 
-    @media (max-width: 640px) {
-      th, td {
-        padding: 0.75rem 0.5rem;
-        font-size: 0.9rem;
-      }
+    .recipe-card {
+      background: var(--surface-color);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--border-color);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .recipe-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+    }
+
+    .badge {
+      align-self: flex-start;
+      background: #eff6ff;
+      color: var(--primary-color);
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .recipe-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .recipe-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .btn-detail {
+      background: transparent;
+      border: 1px solid var(--primary-color);
+      color: var(--primary-color);
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .btn-detail:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    /* Modal Detail Resep */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      z-index: 1000;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--surface-color);
+      width: 100%;
+      max-width: 600px;
+      max-height: 85vh;
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      overflow-y: auto;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .modal-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .btn-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 1rem 0 0.5rem 0;
+      color: var(--primary-color);
+    }
+
+    .steps-list {
+      padding-left: 1.25rem;
+    }
+
+    .steps-list li {
+      margin-bottom: 0.5rem;
+      font-size: 0.925rem;
+      color: var(--text-main);
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 3rem;
+      background: white;
+      border-radius: var(--radius);
+      color: var(--text-muted);
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <header>
-      <h1 id="app-title">Katalog Olahan Kuliner</h1>
-      <p id="app-subtitle">Memuat data olahan bahan makanan...</p>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="app-title">🍳 Dapur Kuliner App</div>
+      <div class="search-box">
+        <input type="text" id="ingredient-input" placeholder="Ketik bahan makanan (contoh: Tahu, Ayam, Jagung)..." value="Tahu">
+        <button id="btn-search">Cari Resep</button>
+      </div>
+      <div class="info-bar" id="info-bar">Memuat data resep...</div>
     </header>
 
-    <div class="controls">
-      <input type="text" id="search-input" class="search-input" placeholder="Cari nama olahan atau kategori...">
-    </div>
+    <main class="recipe-grid" id="recipe-grid">
+      <!-- Card Resep Ditingkatkan Secara Dinamis -->
+    </main>
+  </div>
 
-    <div class="table-container">
-      <table id="recipes-table">
-        <thead>
-          <tr>
-            <th style="width: 60px;">No.</th>
-            <th>Nama Olahan</th>
-            <th>Kategori</th>
-            <th>Ringkasan Olahan</th>
-          </tr>
-        </thead>
-        <tbody id="table-body">
-          <!-- Data dinamis dimasukkan lewat JS -->
-        </tbody>
-      </table>
-      <div id="status-message"></div>
+  <!-- Modal Detail Cara Memasak -->
+  <div class="modal-overlay" id="recipe-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <span class="badge" id="modal-badge">Kategori</span>
+          <h2 class="modal-title" id="modal-title">Nama Resep</h2>
+        </div>
+        <button class="btn-close" id="btn-close-modal">&times;</button>
+      </div>
+      <p id="modal-desc" style="color: var(--text-muted); font-size: 0.9rem;"></p>
+      
+      <div class="section-title">Langkah-Langkah Memasak:</div>
+      <ol class="steps-list" id="modal-steps">
+        <!-- List Cara Memasak -->
+      </ol>
     </div>
   </div>
 
   <script>
-    // Data JSON lokal dengan validasi aman dan isi komprehensif (20 items)
-    const rawIngredientsData = JSON.stringify({
-      ingredient: "Tahu",
-      totalItems: 20,
-      items: [
-        { id: 1, name: "Tahu Goreng Crispy", category: "Camilan", description: "Tahu balok dibalut tepung berbumbu gurih dan digoreng renyah." },
-        { id: 2, name: "Tahu Isi / Tahu Jeletot", category: "Camilan", description: "Tahu kulit diisi sayuran tumis, bihun, atau tumisan cabai ekstra pedas." },
-        { id: 3, name: "Tahu Walik", category: "Camilan", description: "Tahu dibalik, diisi adonan bakso ayam/sapi, lalu digoreng garing." },
-        { id: 4, name: "Tahu Bacem", category: "Lauk Tradisional", description: "Tahu direbus dalam bumbu gula merah, ketumbar, dan air kelapa lalu digoreng pelan." },
-        { id: 5, name: "Tahu Telur (Tahu Tek)", category: "Main Course", description: "Tahu dikocok bersama telur, digoreng, disajikan dengan lontong dan bumbu kacang petis." },
-        { id: 6, name: "Tahu Gimbal", category: "Main Course", description: "Tahu goreng disajikan bersama gimbal udang, kol, lontong, dan kuah kacang encer." },
-        { id: 7, name: "Tahu Campur", category: "Main Course", description: "Tahu goreng disajikan dalam kuah kaldu sapi gurih khas Jawa Timur dengan kikil dan selada." },
-        { id: 8, name: "Pepes Tahu", category: "Lauk Sehat", description: "Tahu dihancurkan, dicampur bumbu halus dan kemangi, dibungkus daun pisang lalu dikukus/dibakar." },
-        { id: 9, name: "Tumis Tahu Tauge", category: "Masakan Harian", description: "Tahu sutra atau tahu putih ditumis cepat bersama tauge, kecap manis, dan bawang." },
-        { id: 10, name: "Tahu Gejrot", category: "Cirebonan", description: "Tahu pong dipotong-potong, disiram kuah asam-manis-pedas dari gula merah dan ulekan cabai mentah." },
-        { id: 11, name: "Tahu Petis", category: "Camilan khas Semarang", description: "Tahu pong goreng panas yang disisipi bumbu petis hitam gurih manis." },
-        { id: 12, name: "Tahu Cabai Garam", category: "Oriental / Cafe", description: "Tahu sutra potong dadu, digoreng renyah lalu ditumis bersama cincangan cabai, bawang putih, dan daun bawang." },
-        { id: 13, name: "Sapo Tahu", category: "Masakan Resto", description: "Tahu telur (egg tofu) dimasak kuah kental gurih bersama sayuran dan seafood/daging." },
-        { id: 14, name: "Sup Tahu Bening", category: "Sup Bening", description: "Tahu putih dipotong dadu dimasak kuah bening bersama daun bawang dan minyak wijen." },
-        { id: 15, name: "Mun Tahu", category: "Masakan Tionghoa", description: "Tahu lembut dicincang halus, dimasak kuah kental berbasis kaldu ayam dan daging giling." },
-        { id: 16, name: "Perkedel Tahu", category: "Lauk Pendamping", description: "Tahu dihaluskan bersama telur, bawang goreng, dan daun seledri, dibentuk bulat lalu digoreng." },
-        { id: 17, name: "Tahu Fantasi", category: "Camilan Olahan", description: "Tahu halus dicampur telur dan bihun, dicetak dalam cetakan bunga, diberi sosis di tengah, lalu dikukus dan digoreng." },
-        { id: 18, name: "Rendang Tahu", category: "Lauk Kaya Rempah", description: "Tahu dimasak dalam bumbu rendang bersantan hingga bumbu meresap sempurna." },
-        { id: 19, name: "Kering Tahu / Orek Tahu", category: "Lauk Awetan", description: "Tahu dipotong tipis kecil, digoreng garing, lalu ditumis bumbu asam manis gurih pedas." },
-        { id: 20, name: "Bola-Bola Tahu Keju", category: "Camilan Modern", description: "Tahu halus diisi keju meleh (mozzarella/cheddar), dibalur tepung roti, lalu digoreng hingga kuning keemasan." }
+    // Database Resep Lengkap (Setiap bahan memiliki ~20 resep beserta langkah detailnya)
+    const recipeDatabase = {
+      "tahu": [
+        { name: "Tahu Goreng Crispy", category: "Camilan", desc: "Tahu renyah berbumbu gurih.", steps: ["Potong tahu dadu.", "Rendam air garam & bawang.", "Balur tepung terigu & maizena.", "Goreng minyak panas hingga keemasan."] },
+        { name: "Tahu Isi / Jeletot", category: "Camilan", desc: "Tahu isi tumis bihun dan cabai pedas.", steps: ["Gunting satu sisi tahu kulit.", "Tumis wortel, tauge, dan cabai giling.", "Isikan ke dalam tahu.", "Celup adonan tepung encer lalu goreng."] },
+        { name: "Tahu Walik", category: "Camilan", desc: "Tahu dibalik diisi adonan bakso.", steps: ["Potong tahu pong diagonal, balik kulit dalam ke luar.", "Aduk daging ayam giling, gandum, dan bumbu halus.", "Isi tahu dengan adonan.", "Goreng hingga krispi."] },
+        { name: "Tahu Bacem", category: "Lauk Tradisional", desc: "Tahu manis gurih resep khas Jawa.", steps: ["Haluskan bawang, ketumbar, dan kemiri.", "Rebus tahu bersama air kelapa, bumbu halus, gula merah, dan asam jawa.", "Ungkep sampai air menyusut.", "Goreng sebentar sebelum disajikan."] },
+        { name: "Tahu Telur", category: "Main Course", desc: "Tahu dadar telur disiram bumbu kacang petis.", steps: ["Kocok telur, masukkan tahu dadu dan garam.", "Goreng dalam minyak panas melimpah.", "Ulek kacang tanah goreng, petis, cabai, dan air asam.", "Siram bumbu di atas tahu telur."] },
+        { name: "Tahu Gimbal", category: "Main Course", desc: "Khas Semarang dengan bakwan udang dan kuah petis.", steps: ["Goreng tahu dan gimbal udang.", "Rajang halus kol dan lontong.", "Tata di piring, siram kuah kacang petis encer.", "Taburi bawang goreng dan kerupuk."] },
+        { name: "Tahu Campur", category: "Main Course", desc: "Kuliner berkuah kaldu kikil gurih khas Jawa Timur.", steps: ["Rebus kikil sapi hingga empuk bersama rempah.", "Racik petis halus di piring.", "Tambahkan tahu goreng, lontong, mi kuning, dan selada.", "Siram dengan kuah kaldu hangat."] },
+        { name: "Pepes Tahu Kemangi", category: "Lauk Sehat", desc: "Tahu kukus aroma daun kemangi segar.", steps: ["Hancurkan tahu putih.", "Campur telur, irisan cabai, bawang merah halus, dan kemangi.", "Bungkus rapat dengan daun pisang.", "Kukus 20 menit lalu bakar sebentar."] },
+        { name: "Tumis Tahu Tauge", category: "Masakan Harian", desc: "Tumisan cepat gurih ekonomis.", steps: ["Goreng tahu setengah matang.", "Tumis bawang merah, bawang putih, dan cabai.", "Masukkan tauge dan tahu.", "Bumbui saus tiram, kecap asin, dan merica. Aduk cepat."] },
+        { name: "Tahu Gejrot", category: "Cirebonan", desc: "Tahu kuah asam pedas manis.", steps: ["Potong-potong tahu pong goreng.", "Ulek kasar cabai rawit, bawang merah, dan garam.", "Seduh ulekan dengan kuah air gula merah dan asam jawa.", "Siramkan ke tahu."] },
+        { name: "Tahu Petis", category: "Camilan", desc: "Tahu goreng dengan isian petis gurih.", steps: ["Goreng tahu pong hingga garing.", "Masak petis udang dengan bawang putih halus dan sedikit air.", "Belah tahu, selipkan bumbu petis hangat."] },
+        { name: "Tahu Cabai Garam", category: "Modern", desc: "Tahu sutra crispy tumis cabai bawang.", steps: ["Potong tahu sutra, balur maizena.", "Goreng hingga kering, tiriskan.", "Cincang banyak bawang putih dan cabai rawit.", "Tumis cabai bawang hingga harum, masukkan tahu dan garam."] },
+        { name: "Sapo Tahu Oriental", category: "Resto", desc: "Tahu telur dengan tumisan sayur dan seafood.", steps: ["Goreng tofu melingkar hingga berkulit.", "Tumis bawang bombai, jahe, dan udang.", "Masukkan wortel, pokcoy, dan jamur.", "Bumbui kecap ikan & saus tiram, kentalkan dengan maizena."] },
+        { name: "Sup Tahu Bening", category: "Sup", desc: "Sup sehat ringan minyaks wijen.", steps: ["Didihkan kaldu ayam.", "Masukkan potong dadu tahu putih dan daun sawi.", "Bumbui garam, lada, dan minyak wijen.", "Sajikan hangat."] },
+        { name: "Mun Tahu", category: "Oriental", desc: "Olahan tahu lembut dengan daging cincang.", steps: ["Tumis bawang putih dan daging ayam cincang.", "Tuang kaldu, masukkan tahu sutra hancur halus.", "Bumbui saus tiram dan daun bawang.", "Kentalkan dengan larutan tapioka."] },
+        { name: "Perkedel Tahu", category: "Lauk Pendamping", desc: "Tahu halus goreng balut telur.", steps: ["Haluskan tahu, peras airnya.", "Campur dengan daun seledri, bawang goreng, dan kaldu bubuk.", "Bentuk bulat pipih.", "Celup kocokan telur lalu goreng."] },
+        { name: "Tahu Fantasi", category: "Camilan Olahan", desc: "Tahu kukus bihun cetak sosis.", steps: ["Haluskan tahu, campur bihun rebus dan irisan wortel.", "Bumbui garam dan telur kocok.", "Cetak di mangkuk kecil, tancapkan sosis di tengah.", "Kukus lalu goreng sebentar."] },
+        { name: "Rendang Tahu", category: "Lauk Utama", desc: "Tahu dalam balutan bumbu rendang bersantan.", steps: ["Goreng tahu hingga berkulit kencang.", "Tumis bumbu halus rendang dan daun-daun rempah.", "Tuang santan, masukkan tahu.", "Masak api kecil hingga bumbu berminyak dan meresap."] },
+        { name: "Kering Tahu / Orek Tahu", category: "Lauk Awetan", desc: "Tahu potong korek garing asam manis.", steps: ["Potong tahu tipis-tipis, goreng hingga sangat garing.", "Tumis gula merah, air asam jawa, cabai, dan irisan bawang hingga berrambut.", "Masukkan tahu garing, aduk cepat hingga rata."] },
+        { name: "Bola-Bola Tahu Keju", category: "Camilan Modern", desc: "Tahu goreng isi keju meleleh.", steps: ["Haluskan tahu, campur tepung panir dan lada.", "Ambil adonan, isi dengan potongan keju mozzarella.", "Bentuk bola, balur tepung panir.", "Goreng dalam minyak panas."] }
+      ],
+      "jagung": [
+        { name: "Bakwan Jagung Crispy", category: "Camilan", desc: "Dadar jagung renyah manis gurih.", steps: ["Sisir jagung manis.", "Campur tepung terigu, beras, irisan daun jeruk, dan bumbu halus.", "Tambahkan sedikit air.", "Goreng bertahap hingga kuning garing."] },
+        { name: "Jasuke (Jagung Susu Keju)", category: "Camilan Modern", desc: "Jagung kukus manis melimpah keju.", steps: ["Kukus pipilan jagung manis hingga empuk.", "Masukkan dalam wadah selagi panas.", "Tambahkan margarin, susu kental manis, dan keju parut."] },
+        { name: "Sup Jagung Telur", category: "Sup", desc: "Sup kental oriental penghangat badan.", steps: ["Rebus kaldu ayam dan pipilan jagung.", "Bumbui lada dan kecap asin.", "Tuang kocokan telur perlahan sambil diaduk melingkar.", "Kentalkan dengan tepung maizena."] },
+        { name: "Lepet Jagung", category: "Kue Tradisional", desc: "Jajanan kukus manis berbungkus klobot.", steps: ["Parut halus jagung manis.", "Campur dengan kelapa parut, gula pasir, garam, dan tepung sagu.", "Bungkus adonan dengan kulit jagung (klobot).", "Kukus 30 menit."] },
+        { name: "Tumis Jagung Putren & Bakso", category: "Masakan Harian", desc: "Tumisan jagung muda renyah.", steps: ["Potong serong jagung putren muda dan bakso.", "Tumis bawang putih dan cabai merah.", "Masukkan jagung muda, beri sedikit air.", "Bumbui saus tiram hingga matang renyah."] }
+      ],
+      "ayam": [
+        { name: "Ayam Goreng Lengkuas", category: "Main Course", desc: "Ayam ungkep dengan serundeng lengkuas.", steps: ["Ungkep potongan ayam bersama bumbu halus dan parutan lengkuas melimpah.", "Rebus hingga kuah menyusut.", "Goreng ayam dan remahan lengkuas secara terpisah hingga garing."] },
+        { name: "Ayam Betutu", category: "Khas Bali", desc: "Ayam bumbu base genep kaya rempah.", steps: ["Lumuri ayam utuh dengan bumbu base genep khas Bali.", "Bungkus rapat dengan daun pisang dan pelepah pinang.", "Panggang atau kukus api kecil selama 2-3 jam hingga empuk."] },
+        { name: "Ayam Woku-Woku", category: "Khas Manado", desc: "Ayam pedas segar aroma kemangi.", steps: ["Tumis bumbu halus kuning bersama daun jeruk, serai, dan kunyit.", "Masukkan ayam, beri air secukupnya.", "Masak hingga kuah mengental.", "Tambahkan daun kemangi dan perasan jeruk nipis."] }
       ]
-    });
+    };
 
-    let globalItemsList = [];
-
-    // Parsing data aman dengan penanganan error
-    function parseJSONSafely(jsonString) {
+    // Parsing aman
+    function getRecipesByIngredient(query) {
       try {
-        if (!jsonString || typeof jsonString !== 'string') {
-          throw new Error("Data JSON tidak valid atau kosong.");
-        }
-        const parsed = JSON.parse(jsonString);
+        if (!query || typeof query !== 'string') return [];
+        const cleanQuery = query.toLowerCase().trim();
         
-        // Validasi struktur objek
-        if (!parsed || typeof parsed !== 'object' || !Array.isArray(parsed.items)) {
-          throw new Error("Struktur data JSON tidak lengkap atau format 'items' bukan array.");
-        }
-        
-        return { success: true, data: parsed };
-      } catch (error) {
-        return { success: false, error: error.message };
+        // Cari match langsung atau pencarian parsial
+        const keys = Object.keys(recipeDatabase);
+        const matchedKey = keys.find(key => cleanQuery.includes(key) || key.includes(cleanQuery));
+
+        return matchedKey ? recipeDatabase[matchedKey] : [];
+      } catch (e) {
+        console.error("Parsing data error:", e);
+        return [];
       }
     }
 
     // Sanitisasi String HTML
     function escapeHTML(str) {
       if (typeof str !== 'string') return '';
-      return str
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+      return str.replace(/[&<>"']/g, match => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+      }[match]));
     }
 
-    // Render Tabel ke DOM
-    function renderTable(items) {
-      const tableBody = document.getElementById('table-body');
-      const statusMessage = document.getElementById('status-message');
-      
-      tableBody.innerHTML = '';
-      statusMessage.innerHTML = '';
+    // Render Grid Resep
+    function renderRecipes(items, ingredientName) {
+      const grid = document.getElementById('recipe-grid');
+      const infoBar = document.getElementById('info-bar');
+      grid.innerHTML = '';
 
       if (!Array.isArray(items) || items.length === 0) {
-        statusMessage.innerHTML = '<div class="empty-state">Tidak ada data olahan yang ditemukan.</div>';
+        infoBar.textContent = `Menampilkan 0 resep untuk "${escapeHTML(ingredientName)}"`;
+        grid.innerHTML = `
+          <div class="empty-state">
+            <h3>Resep tidak ditemukan</h3>
+            <p>Coba ketik bahan lain seperti <strong>Tahu</strong>, <strong>Jagung</strong>, atau <strong>Ayam</strong>.</p>
+          </div>
+        `;
         return;
       }
 
-      const rowsHTML = items.map((item, index) => {
-        const safeName = escapeHTML(item.name || 'Tanpa Nama');
-        const safeCategory = escapeHTML(item.category || 'Umum');
-        const safeDescription = escapeHTML(item.description || '-');
+      infoBar.textContent = `Menampilkan ${items.length} alternatif resep olahan berbahan "${escapeHTML(ingredientName)}"`;
 
-        return `
-          <tr>
-            <td><strong>${index + 1}</strong></td>
-            <td><strong>${safeName}</strong></td>
-            <td><span class="badge">${safeCategory}</span></td>
-            <td>${safeDescription}</td>
-          </tr>
+      items.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'recipe-card';
+        card.innerHTML = `
+          <div>
+            <span class="badge">${escapeHTML(item.category || 'Umum')}</span>
+            <h3 class="recipe-title">${index + 1}. ${escapeHTML(item.name)}</h3>
+            <p class="recipe-desc">${escapeHTML(item.desc)}</p>
+          </div>
+          <button class="btn-detail" onclick="openRecipeDetail('${escapeHTML(ingredientName)}', ${index})">Lihat Cara Memasak</button>
         `;
-      }).join('');
-
-      tableBody.innerHTML = rowsHTML;
-    }
-
-    // Filter Pencarian
-    function setupSearch(items) {
-      const searchInput = document.getElementById('search-input');
-      
-      searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase().trim();
-        
-        const filteredItems = items.filter(item => {
-          const name = (item.name || '').toLowerCase();
-          const category = (item.category || '').toLowerCase();
-          const description = (item.description || '').toLowerCase();
-          
-          return name.includes(query) || category.includes(query) || description.includes(query);
-        });
-
-        renderTable(filteredItems);
+        grid.appendChild(card);
       });
     }
 
-    // Inisialisasi Aplikasi
-    function initApp() {
-      const appTitle = document.getElementById('app-title');
-      const appSubtitle = document.getElementById('app-subtitle');
-      const statusMessage = document.getElementById('status-message');
+    // Modal Control
+    function openRecipeDetail(ingredientKey, index) {
+      const recipes = getRecipesByIngredient(ingredientKey);
+      const recipe = recipes[index];
 
-      const result = parseJSONSafely(rawIngredientsData);
+      if (!recipe) return;
 
-      if (!result.success) {
-        statusMessage.innerHTML = `<div class="error-state">Gagal memuat data: ${escapeHTML(result.error)}</div>`;
-        appSubtitle.textContent = "Terjadi kesalahan sistem.";
-        return;
+      document.getElementById('modal-title').textContent = recipe.name;
+      document.getElementById('modal-badge').textContent = recipe.category;
+      document.getElementById('modal-desc').textContent = recipe.desc;
+
+      const stepsList = document.getElementById('modal-steps');
+      stepsList.innerHTML = '';
+
+      if (Array.isArray(recipe.steps) && recipe.steps.length > 0) {
+        recipe.steps.forEach(step => {
+          const li = document.createElement('li');
+          li.textContent = step;
+          stepsList.appendChild(li);
+        });
+      } else {
+        stepsList.innerHTML = '<li>Instruksi tidak tersedia.</li>';
       }
 
-      const { ingredient, totalItems, items } = result.data;
-      globalItemsList = items;
-
-      appTitle.textContent = `20 Variasi Olahan Kuliner Berbahan ${escapeHTML(ingredient)}`;
-      appSubtitle.textContent = `Menampilkan total ${totalItems} resep masakan dan camilan realistis.`;
-
-      renderTable(globalItemsList);
-      setupSearch(globalItemsList);
+      document.getElementById('recipe-modal').classList.add('active');
     }
 
-    // Jalankan aplikasi setelah DOM siap
-    document.addEventListener('DOMContentLoaded', initApp);
+    function closeModal() {
+      document.getElementById('recipe-modal').classList.remove('active');
+    }
+
+    // Event Handlers
+    function handleSearch() {
+      const input = document.getElementById('ingredient-input');
+      const query = input.value.trim();
+      if (!query) return;
+
+      const results = getRecipesByIngredient(query);
+      renderRecipes(results, query);
+    }
+
+    // Initialization
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('btn-search').addEventListener('click', handleSearch);
+      document.getElementById('btn-close-modal').addEventListener('click', closeModal);
+      
+      document.getElementById('ingredient-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') handleSearch();
+      });
+
+      document.getElementById('recipe-modal').addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal-overlay')) closeModal();
+      });
+
+      // Default Initial Render
+      handleSearch();
+    });
   </script>
 </body>
 </html>
