@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#5b351b">
+<title>DAPURKU - Asisten Dapur Ibu</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  min-height:100vh;
+  color:#3d2819;
+  background:
+    linear-gradient(rgba(42,24,12,.72),rgba(42,24,12,.78)),
+    url("https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1800&q=85")
+    center/cover fixed;
+}
+
+/* ===== HEADER ===== */
+.header{
+  text-align:center;
+  padding:28px 15px 20px;
+  color:white;
+  background:linear-gradient(135deg,rgba(91,53,27,.96),rgba(170,108,45,.90));
+  box-shadow:0 5px 25px rgba(0,0,0,.35);
+}
+
+.header h1{
+  font-size:clamp(30px,8vw,52px);
+  letter-spacing:2px;
+  text-shadow:0 3px 8px rgba(0,0,0,.45);
+}
+
+.header p{
+  margin-top:6px;
+  font-size:15px;
+  opacity:.95;
+}
+
+/* Developer & Visitor Counter */
+.meta-info{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-top:12px;
+  font-size:13px;
+  font-weight:bold;
+  letter-spacing:0.5px;
+}
+
+.developer, .visitor-counter{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(0,0,0,0.25);
+  padding:6px 14px;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,0.2);
+}
+
+.dev-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#6cff83;
+  box-shadow:0 0 8px #6cff83;
+  animation:blink 1.1s infinite;
+}
+
+@keyframes blink{
+  0%,100%{
+    opacity:1;
+    transform:scale(1);
+  }
+  50%{
+    opacity:.25;
+    transform:scale(.65);
+  }
+}
+
+/* ===== MAIN ===== */
+.container{
+  width:min(1100px,94%);
+  margin:25px auto 50px;
+}
+
+.welcome{
+  color:white;
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.welcome h2{
+  font-size:25px;
+  text-shadow:0 2px 5px #000;
+}
+
+.welcome p{
+  margin-top:6px;
+  opacity:.9;
+}
+
+/* ===== GRID ===== */
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.menu-card{
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.94);
+  border-radius:22px;
+  padding:22px 15px;
+  text-align:center;
+  cursor:pointer;
+  box-shadow:0 8px 25px rgba(0,0,0,.28);
+  transition:.25s;
+}
+
+.menu-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 14px 30px rgba(0,0,0,.35);
+}
+
+.menu-icon{
+  font-size:42px;
+  margin-bottom:9px;
+}
+
+.menu-card h3{
+  color:#6d3c1c;
+  margin-bottom:5px;
+}
+
+.menu-card p{
+  font-size:13px;
+  color:#735b48;
+}
+
+/* ===== PANEL ===== */
+.panel{
+  display:none;
+  margin-top:20px;
+  padding:23px;
+  border-radius:25px;
+  background:rgba(255,250,242,.97);
+  box-shadow:0 10px 35px rgba(0,0,0,.35);
+}
+
+.panel.active{
+  display:block;
+  animation:show .3s ease;
+}
+
+@keyframes show{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.panel h2{
+  color:#6d3c1c;
+  margin-bottom:15px;
+}
+
+.close-btn{
+  float:right;
+  border:0;
+  background:#6d3c1c;
+  color:white;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+/* ===== FORM ===== */
+input,select,textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #d6b99a;
+  border-radius:12px;
+  margin:7px 0 12px;
+  font-size:15px;
+  background:white;
+}
+
+button{
+  border:0;
+  border-radius:12px;
+  padding:12px 17px;
+  background:linear-gradient(135deg,#8a4d21,#c27a32);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 4px 10px rgba(0,0,0,.18);
+}
+
+button:hover{
+  opacity:.9;
+}
+
+.btn-danger{
+  background:#a83232;
+}
+
+/* ===== MASAKAN ===== */
+.recipe-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+  margin-top:15px;
+}
+
+.recipe{
+  background:#fff;
+  border-radius:16px;
+  padding:18px;
+  border:1px solid #ead8c5;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
+.recipe h3{
+  color:#6d3c1c;
+  margin-bottom:8px;
+  border-bottom:2px solid #f4e8db;
+  padding-bottom:5px;
+}
+
+.recipe p{
+  font-size:13.5px;
+  margin-top:8px;
+  line-height:1.6;
+  color:#4a3525;
+}
+
+.recipe ol{
+  margin-left:18px;
+  margin-top:6px;
+  font-size:13px;
+  line-height:1.5;
+  color:#523e30;
+}
+
+.recipe li{
+  margin-bottom:6px;
+}
+
+.recipe button{
+  margin-top:12px;
+  width:100%;
+}
+
+/* ===== SHOPPING & STOK ===== */
+.list-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px;
+  background:#fff;
+  border-bottom:1px solid #ead8c5;
+  border-radius:8px;
+  margin-bottom:6px;
+}
+
+.list-item input[type="checkbox"]{
+  width:auto;
+  margin:0;
+}
+
+.list-item span{
+  flex:1;
+}
+
+.delete{
+  background:#a83232;
+  padding:7px 12px;
+  border-radius:8px;
+}
+
+/* ===== TIMER ===== */
+.timer{
+  text-align:center;
+}
+
+.timer-display{
+  font-size:64px;
+  font-weight:bold;
+  color:#6d3c1c;
+  margin:20px 0;
+}
+
+/* ===== BUDGET ===== */
+.total{
+  margin-top:15px;
+  padding:18px;
+  border-radius:15px;
+  background:#6d3c1c;
+  color:white;
+  text-align:center;
+}
+
+.total strong{
+  font-size:28px;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  color:white;
+  text-align:center;
+  padding:20px;
+  background:rgba(35,20,10,.85);
+  font-size:12px;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:700px){
+  .menu-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .recipe-grid{
+    grid-template-columns:1fr;
+  }
+
+  .menu-card{
+    padding:18px 10px;
+  }
+
+  .menu-icon{
+    font-size:35px;
+  }
+
+  .panel{
+    padding:18px;
+  }
+}
+
+@media(max-width:420px){
+  .menu-grid{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  .menu-card h3{
+    font-size:14px;
+  }
+
+  .menu-card p{
+    font-size:11px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <h1>🍳 DAPURKU</h1>
+  <p>Asisten Dapur Ibu • Praktis • Hemat • Pintar</p>
+
+  <div class="meta-info">
+    <div class="developer">
+      <span class="dev-dot"></span>
+      <span>developer : fatur62</span>
+    </div>
+    <div class="visitor-counter">
+      <span>👁️ Pengunjung: <span id="visitorCount">Memuat...</span></span>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="welcome">
+    <h2>Selamat Datang di Dapurku 👩‍🍳</h2>
+    <p>Hari ini mau masak apa, Bu?</p>
+  </section>
+
+  <!-- MENU -->
+  <div class="menu-grid">
+
+    <div class="menu-card" onclick="openPanel('masak')">
+      <div class="menu-icon">🥘</div>
+      <h3>Mau Masak Apa?</h3>
+      <p>Cari masakan dari bahan yang tersedia</p>
+    </div>
+
+    <div class="menu-card" onclick="openPanel('mingguan')">
+      <div class="menu-icon">📅</div>
+      <h3>Menu Mingguan</h3>
+      <p>Atur menu keluarga selama 7 hari</p>
+    </div>
+
+    <div class="menu-card" onclick="openPanel('belanja')">
+      <div class="menu-icon">🛒</div>
+      <h3>Daftar Belanja</h3>
+      <p>Catat kebutuhan belanja dapur</p>
+    </div>
+
+    <div class="menu-card" onclick="openPanel('stok')">
+      <div class="menu-icon">📦</div>
+      <h3>Stok Dapur</h3>
+      <p>Catat bahan yang tersedia</p>
+    </div>
+
+    <div class="menu-card" onclick="openPanel('budget')">
+      <div class="menu-icon">💰</div>
+      <h3>Hitung Belanja</h3>
+      <p>Hitung total pengeluaran</p>
+    </div>
+
+    <div class="menu-card" onclick="openPanel('timer')">
+      <div class="menu-icon">⏱️</div>
+      <h3>Timer Dapur</h3>
+      <p>Pengingat waktu memasak</p>
+    </div>
+
+  </div>
+
+  <!-- MASAK -->
+  <section id="masak" class="panel">
+    <button class="close-btn" onclick="closePanels()">×</button>
+    <h2>🥘 Mau Masak Apa?</h2>
+
+    <p>Masukkan bahan yang tersedia:</p>
+
+    <input id="bahanInput"
+           placeholder="Contoh: ikan nila, daging sapi, telur, ayam, cumi, udang">
+
+    <button onclick="cariMasakan()">🔍 Cari Masakan</button>
+
+    <div id="hasilMasakan" class="recipe-grid"></div>
+  </section>
+
+  <!-- MENU MINGGUAN -->
+  <section id="mingguan" class="panel">
+    <button class="close-btn" onclick="closePanels()">×</button>
+
+    <h2>📅 Menu Keluarga 7 Hari</h2>
+
+    <div id="menuMingguan"></div>
+  </section>
+
+  <!-- BELANJA -->
+  <section id="belanja" class="panel">
+    <button class="close-btn" onclick="closePanels()">×</button>
+
+    <h2>🛒 Daftar Belanja</h2>
+
+    <input id="belanjaInput"
+           placeholder="Contoh: minyak goreng">
+
+    <button onclick="tambahBelanja()">＋ Tambah</button>
+
+    <div id="daftarBelanja" style="margin-top:15px"></div>
+  </section>
+
+  <!-- STOK -->
+  <section id="stok" class="panel">
+    <button class="close-btn" onclick="closePanels()">×</button>
+
+    <h2>📦 Stok Dapur</h2>
+
+    <input id="stokInput"
+           placeholder="Contoh: daging sapi 500gr, ikan nila 2 ekor">
+
+    <button onclick="tambahStok()">＋ Tambah Stok</button>
+
+    <div id="daftarStok" style="margin-top:15px"></div>
+  </section>
+
+  <!-- BUDGET -->
+  <section id="budget" class="panel">
+    <button class="close-btn" onclick="closePanels()">×</button>
+
+    <h2>💰 Kalkulator Belanja</h2>
+
+    <input id="namaHarga"
+           placeholder="Nama bahan">
+
+    <input id="nilaiHarga"
+           type="number"
+           placeholder="Harga (Rp)">
+
+    <button onclick="tambahHarga()">＋ Tambahkan</button>
+
+    <div id="daftarHarga" style="margin-top:15px"></div>
+
+    <div class="total">
+      <div>Total Belanja</div>
+      <strong id="totalHarga">Rp0</strong>
+    </div>
+  </section>
+
+  <!-- TIMER -->
+  <section id="timer" class="panel">
+    <button class="close-btn" onclick="closePanels()">×</button>
+
+    <div class="timer">
+      <h2>⏱️ Timer Dapur</h2>
+
+      <input id="menit"
+             type="number"
+             placeholder="Masukkan menit"
+             min="1">
+
+      <div class="timer-display" id="timerDisplay">
+        00:00
+      </div>
+
+      <button onclick="mulaiTimer()">▶ Mulai</button>
+
+      <button onclick="stopTimer()" class="btn-danger">
+        ■ Stop
+      </button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 DAPURKU • Asisten Dapur Ibu<br>
+  Dibuat dengan ❤️ oleh fatur62
+</footer>
+
+<script>
+
+/* =========================================
+   VISITOR COUNTER (AUTOMATIC INCREMENT)
+========================================= */
+function initVisitorCounter() {
+  const counterEl = document.getElementById("visitorCount");
+  
+  // Menggunakan CountAPI publik yang aman (Domain namespace & key unik)
+  const namespace = "dapurku-fatur62-app";
+  const key = "visits";
+  const apiUrl = `https://api.countapi.xyz/hit/${namespace}/${key}`;
+
+  fetch(apiUrl)
+    .then(res => {
+      if(!res.ok) throw new Error("Gagal terhubung ke server counter");
+      return res.json();
+    })
+    .then(data => {
+      if(data && typeof data.value === "number"){
+        counterEl.textContent = data.value.toLocaleString("id-ID");
+      } else {
+        throw new Error("Format respons tidak valid");
+      }
+    })
+    .catch(() => {
+      // Fallback lokal jika API offline/terblokir
+      let localVisits = Number(localStorage.getItem("dapurku_visits") || 105);
+      localVisits += 1;
+      localStorage.setItem("dapurku_visits", localVisits);
+      counterEl.textContent = localVisits.toLocaleString("id-ID");
+    });
+}
+
+
+/* =========================================
+   HELPER UTILITY STORAGE (SAFE PARSE)
+========================================= */
+function safeGetStorage(key, fallback){
+  try {
+    const raw = localStorage.getItem(key);
+    if (!raw) return fallback;
+    return JSON.parse(raw);
+  } catch (e) {
+    console.error("Gagal parse localStorage:", key, e);
+    return fallback;
+  }
+}
+
+function safeSetStorage(key, value){
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (e) {
+    console.error("Gagal simpan ke localStorage:", key, e);
+  }
+}
+
+
+/* =========================================
+   PANEL
+========================================= */
+function openPanel(id){
+  closePanels();
+  const panel = document.getElementById(id);
+  if(!panel) return;
+  panel.classList.add("active");
+
+  setTimeout(()=>{
+    panel.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+  },100);
+}
+
+function closePanels(){
+  document.querySelectorAll(".panel")
+    .forEach(p=>p.classList.remove("active"));
+}
+
+
+/* =========================================
+   DATABASE MASAKAN SANGAT LENGKAP & DETAIL
+========================================= */
+const resep = [
+  // --- ANEKA IKAN & SEAFOOD ---
+  {
+    nama: "Ikan Nila Goreng Sambal Terasi",
+    bahan: ["ikan", "ikan nila", "kunyit", "bawang putih", "cabai", "terasi", "jeruk nipis"],
+    detailBahan: "2 ekor ikan nila segar, 1 sdm air jeruk nipis, 3 siung bawang putih, 2 cm kunyit, 1 sdt ketumbar, garam, 10 cabai rawit, 1 buah terasi bakar, 1 buah tomat.",
+    langkah: [
+      "Bersihkan ikan nila, kerat-kerat badannya, lalu lumuri dengan air jeruk nipis dan garam. Diamkan 10 menit.",
+      "Haluskan bawang putih, kunyit, ketumbar, dan garam. Balurkan rata ke seluruh tubuh ikan.",
+      "Goreng ikan dalam minyak panas yang banyak dengan api sedang hingga matang garing keemasan. Tiriskan.",
+      "Ulek cabai rawit, bawang merah, terasi bakar, tomat, dan sedikit gula garam hingga halus/kasar sesuai selera.",
+      "Sajikan ikan nila goreng renyah hangat bersama ulekan sambal terasi segar."
+    ]
+  },
+  {
+    nama: "Ikan Gurame Asam Manis",
+    bahan: ["ikan", "ikan gurame", "saus tomat", "bawang bombay", "nanas", "tepung maizena", "wortel"],
+    detailBahan: "1 ekor ikan gurame (fillet/utuh), 100gr tepung terigu, 2 sdm maizena, 1/2 buah nanas potong, 1/2 wortel iris korek api, 1/2 bombay, 4 sdm saus tomat, 1 sdm saus tiram.",
+    langkah: [
+      "Balur potongan gurame dengan kocokan telur lalu gulingkan ke campuran tepung terigu dan maizena.",
+      "Goreng dalam minyak panas hingga berwarna kuning keemasan dan krispi. Angkat dan tata di piring.",
+      "Tumis bawang putih cincang dan bawang bombay hingga harum. Masukkan wortel dan nanas.",
+      "Tambahkan saus tomat, saus tiram, sedikit gula, garam, dan air. Aduk hingga mendidih.",
+      "Tuangkan larutan maizena sedikit demi sedikit hingga saus mengental gurih, lalu siramkan di atas gurame goreng."
+    ]
+  },
+  {
+    nama: "Ikan Tongkol Suwir Balado Kemangi",
+    bahan: ["ikan", "ikan tongkol", "kemangi", "cabai merah", "cabai rawit", "bawang merah", "bawang putih"],
+    detailBahan: "300gr tongkol cue/pindang, 1 genggam kemangi segar, 8 cabai merah keriting, 5 cabai rawit, 5 bawang merah, 2 bawang putih, 2 lembar daun jeruk.",
+    langkah: [
+      "Goreng ikan tongkol sebentar agar tidak amis, lalu suwir-suwir dagingnya kasar.",
+      "Haluskan cabai merah, cabai rawit, bawang merah, dan bawang putih.",
+      "Tumis bumbu halus bersama daun jeruk hingga matang harum dan minyaknya keluar.",
+      "Masukkan suwiran tongkol, bumbui dengan garam, gula, dan kaldu bubuk. Aduk hingga bumbu meresap.",
+      "Sesaat sebelum diangkat, masukkan daun kemangi, aduk sebentar hingga layu lalu sajikan."
+    ]
+  },
+  {
+    nama: "Pindang Patin Kuah Segar",
+    bahan: ["ikan", "ikan patin", "kunyit", "serai", "belimbing wuluh", "cabai rawit", "daun salam"],
+    detailBahan: "500gr ikan patin, 4 belimbing wuluh (iris), 2 batang serai, 3 cm kunyit bakar, 3 cm jahe, 5 cabai rawit utuh, 2 lembar daun salam, daun kemangi.",
+    langkah: [
+      "Cuci bersih ikan patin, lumuri jeruk nipis 10 menit lalu bilas bersih.",
+      "Didihkan 800ml air. Masukkan bumbu iris/geprek: kunyit, jahe, serai, daun salam, dan lengkuas.",
+      "Setelah air mendidih dan harum, masukkan potongan ikan patin dan cabai rawit utuh.",
+      "Tambahkan irisan belimbing wuluh, garam, gula pasir, dan sedikit kecap ikan.",
+      "Masak dengan api sedang hingga ikan matang lembut, matikan api lalu taburi daun kemangi."
+    ]
+  },
+  {
+    nama: "Cumi Goreng Tepung Krispi",
+    bahan: ["cumi", "seafood", "tepung terigu", "tepung maizena", "bawang putih", "merica"],
+    detailBahan: "500gr cumi segar (potong cincin), 1 sdt air jeruk nipis, 150gr tepung terigu, 50gr maizena, 1 sdt baking powder, 1 sdt lada bubuk, 1 sdt bawang putih bubuk.",
+    langkah: [
+      "Lumuri cumi dengan jeruk nipis, garam, dan lada. Simpan di kulkas selama 15 menit.",
+      "Campurkan tepung terigu, maizena, baking powder, bawang putih bubuk, garam, dan lada hingga rata.",
+      "Ambil 3 sdm adonan tepung, campur dengan sedikit air es untuk adonan basah.",
+      "Celupkan cumi ke adonan basah, lalu gulingkan ke adonan tepung kering sambil dicubit-cubit perlahan.",
+      "Goreng cumi dalam minyak panas banyak dengan api sedang-besar hingga renyah keemasan (maksimal 3 menit agar tidak ulet)."
+    ]
+  },
+  {
+    nama: "Udang Saus Tiram Bawang Bombay",
+    bahan: ["udang", "seafood", "saus tiram", "bawang bombay", "bawang putih", "kecap manis", "daun bawang"],
+    detailBahan: "350gr udang kupas (sisakan ekor), 1/2 bawang bombay (iris), 3 siung bawang putih (cincang), 2 sdm saus tiram, 1 sdm kecap manis, 1 sdt minyak wijen.",
+    langkah: [
+      "Bersihkan udang, belah punggungnya dan buang kotorannya. Bersihkan dan tiriskan.",
+      "Tumis bawang putih cincang dan bawang bombay iris hingga harum dan layu.",
+      "Masukkan udang, aduk cepat hingga warna udang berubah menjadi kemerahan.",
+      "Bubuhi saus tiram, kecap manis, garam, lada, dan sedikit air. Masak hingga kuah mengental meresap.",
+      "Siram minyak wijen dan irisan daun bawang di akhir memasak, aduk rata lalu angkat."
+    ]
+  },
+
+  // --- ANEKA DAGING SAPI & KAMBING ---
+  {
+    nama: "Rendang Daging Sapi Empuk",
+    bahan: ["daging", "daging sapi", "santan", "kelapa parut", "cabai merah", "lengkuas", "serai", "bawang putih"],
+    detailBahan: "500gr daging sapi paha, 1 liter santan kental, 500ml santan encer, 100gr kelapa parut sangrai (serundeng halus), 10 cabai merah, 8 bawang merah, 4 bawang putih, rempah rendang lengkap.",
+    langkah: [
+      "Haluskan cabai, bawang merah, bawang putih, jahe, kunyit, dan kemiri.",
+      "Didihkan santan encer bersama bumbu halus, serai, daun jeruk, daun kunyit, dan asam kandis.",
+      "Masukkan potongan daging sapi, aduk perlahan dengan api sedang hingga santan menyusut.",
+      "Tuang santan kental dan kelapa parut sangrai. Kecilkan api, masak terus sambil diaduk sesekali.",
+      "Masak selama 3-4 jam hingga minyak keluar dan bumbu berubah menjadi cokelat kehitaman yang gurih meresap."
+    ]
+  },
+  {
+    nama: "Tumis Daging Sapi Lada Hitam",
+    bahan: ["daging", "daging sapi", "saus lada hitam", "paprika", "bawang bombay", "bawang putih", "saus tiram"],
+    detailBahan: "350gr daging sapi has dalam (iris tipis lawan serat), 1 sdm lada hitam tumbuk kasar, 1/2 paprika hijau/merah, 1/2 bombay, 2 sdm saus tiram, 1 sdm kecap manis.",
+    langkah: [
+      "Marinasi irisan daging sapi dengan saus tiram, kecap manis, sedikit minyak wijen, dan 1/2 sdt lada hitam selama 20 menit.",
+      "Panaskan minyak, tumis bawang putih cincang dan bawang bombay hingga wangi.",
+      "Masukkan daging sapi marinasi, aduk cepat dengan api besar hingga berubah warna.",
+      "Masukkan irisan paprika dan sisa lada hitam tumbuk kasar.",
+      "Tambahkan sedikit air dan gula pasir, aduk hingga daging empuk dan saus meresap kental."
+    ]
+  },
+  {
+    nama: "Rawon Daging Sapi Kuah Hitam",
+    bahan: ["daging", "daging sapi", "kluwek", "bawang merah", "bawang putih", "serai", "tauge pendek"],
+    detailBahan: "500gr daging sapi sandung lamur, 4 buah kluwek (ambil isinya, rendam air hangat), 8 bawang merah, 4 bawang putih, 3 kemiri, 2 batang serai, daun jeruk.",
+    langkah: [
+      "Rebus daging sapi hingga setengah empuk, potong dadu. Simpan air rebusan sebagai kaldu.",
+      "Haluskan kluwek, bawang merah, bawang putih, kemiri, ketumbar, dan kunyit.",
+      "Tumis bumbu halus bersama serai, lengkuas geprek, dan daun jeruk hingga benar-benar matang dan wangi.",
+      "Masukkan bumbu tumis ke dalam panci berisi kaldu daging. Masukkan potongan daging sapi.",
+      "Bumbui dengan garam, gula, dan kaldu sapi. Masak dengan api kecil hingga daging sangat empuk. Sajikan dengan tauge pendek dan sambal."
+    ]
+  },
+  {
+    nama: "Tongseng Daging Kambing / Sapi",
+    bahan: ["daging", "daging kambing", "daging sapi", "kol", "tomat", "cabai rawit", "kecap manis", "santan"],
+    detailBahan: "400gr daging kambing/sapi (rebus empuk), 100gr kol iris, 2 buah tomat hijau/merah, 10 cabai rawit utuh, 4 sdm kecap manis, 400ml santan encer.",
+    langkah: [
+      "Tumis bumbu halus (bawang merah, bawang putih, kunyit, jahe, kemiri) hingga harum.",
+      "Masukkan potongan daging yang sudah diungkep empuk, aduk rata bersama bumbu.",
+      "Tuangkan santan encer dan kecap manis. Bumbui dengan garam, merica, dan sedikit gula.",
+      "Setelah kuah mendidih dan meresap, masukkan irisan kol, tomat, dan cabai rawit utuh.",
+      "Masak sebentar hingga kol sedikit layu namun tetap renyah, angkat dan sajikan panas."
+    ]
+  },
+
+  // --- ANEKA AYAM ---
+  {
+    nama: "Ayam Goreng Lengkuas Gurih",
+    bahan: ["ayam", "daging ayam", "lengkuas", "kunyit", "bawang putih", "serai"],
+    detailBahan: "1 ekor ayam (potong 8), 200gr lengkuas parut halus, 5 siung bawang putih, 3 cm kunyit, 3 kemiri, 2 batang serai, 2 lembar daun salam.",
+    langkah: [
+      "Haluskan bawang putih, kunyit, kemiri, ketumbar, dan garam.",
+      "Campurkan potongan ayam, bumbu halus, dan parutan lengkuas yang melimpah ke dalam wajan.",
+      "Tambahkan sedikit air, serai geprek, dan daun salam. Ungkep dengan api sedang hingga air menyusut dan ayam empuk.",
+      "Tiriskan ayam. Goreng ayam dalam minyak panas hingga kuning keemasan, angkat.",
+      "Goreng sisa bumbu parutan lengkuas hingga garing kecokelatan. Taburkan di atas ayam goreng."
+    ]
+  },
+  {
+    nama: "Ayam Kecap Mentega",
+    bahan: ["ayam", "daging ayam", "mentega", "kecap manis", "bawang bombay", "bawang putih", "jeruk nipis"],
+    detailBahan: "500gr daging ayam (potong kecil), 3 sdm mentega/margarin, 1/2 bombay (iris serong), 3 bawang putih, 3 sdm kecap manis, 1 sdm saus tiram, 1 sdt kecap Inggris.",
+    langkah: [
+      "Goreng ayam yang telah diberi garam dan jeruk nipis hingga setengah matang berkulit. Tiriskan.",
+      "Llehkan mentega di wajan, tumis bawang putih cincang dan bawang bombay hingga wangi.",
+      "Masukkan saus tiram, kecap manis, kecap Inggris, dan sedikit lada bubuk.",
+      "Masukkan ayam goreng, beri sedikit air (sekitar 50ml), masak hingga saus karamel meresap sempurna.",
+      "Beri perasan jeruk limau/nipis sesaat sebelum diangkat untuk aroma segar."
+    ]
+  },
+  {
+    nama: "Opor Ayam Kuah Santan Gurih",
+    bahan: ["ayam", "daging ayam", "santan", "ketumbar", "kemiri", "bawang putih", "serai", "daun salam"],
+    detailBahan: "1 ekor ayam (potong 10), 1 liter santan (500ml encer, 500ml kental), 8 bawang merah, 4 bawang putih, 4 kemiri sangrai, 1 sdt ketumbar, 1/2 sdt jintan.",
+    langkah: [
+      "Haluskan bawang merah, bawang putih, kemiri, ketumbar, jintan, dan jahe.",
+      "Tumis bumbu halus bersama serai, lengkuas, dan daun salam hingga harum dan tidak langu.",
+      "Masukkan potongan ayam, aduk hingga ayam berubah warna kaku.",
+      "Tuangkan santan encer, bumbui dengan garam, gula pasir, dan kaldu bubuk. Masak hingga ayam empuk.",
+      "Tuangkan santan kental, aduk perlahan agar santan tidak pecah hingga mendidih matang. Taburi bawang goreng."
+    ]
+  },
+
+  // --- ANEKA TELUR ---
+  {
+    nama: "Telur Balado khas Padang",
+    bahan: ["telur", "cabai merah", "cabai rawit", "bawang merah", "bawang putih", "tomat"],
+    detailBahan: "6 butir telur ayam (rebus, kupas kulit), 10 cabai merah keriting, 5 cabai rawit, 6 bawang merah, 2 bawang putih, 1 buah tomat merah.",
+    langkah: [
+      "Goreng telur rebus yang telah dikupas dalam minyak panas hingga permukaannya berkulit keemasan. Tiriskan.",
+      "Tumbuk atau ulek kasar cabai merah, cabai rawit, bawang merah, bawang putih, dan tomat.",
+      "Tumis bumbu balado kasar dalam minyak secukupnya dengan api sedang hingga matang berminyak.",
+      "Bumbui dengan garam, gula pasir, dan sedikit kaldu bubuk.",
+      "Masukkan telur goreng, aduk hingga seluruh permukaan telur terselimuti bumbu balado."
+    ]
+  },
+  {
+    nama: "Telur Dadar Padang Tebal & Gurih",
+    bahan: ["telur", "daun bawang", "tepung beras", "cabai merah", "bawang merah"],
+    detailBahan: "4 butir telur bebek/ayam, 2 batang daun bawang (iris halus), 2 sdm tepung beras (larutkan sedikit air), 3 cabai merah (cincang), 1/2 sdt kunyit bubuk, garam, lada.",
+    langkah: [
+      "Kocok telur bersama larutan tepung beras, kunyit bubuk, garam, dan lada hingga berbusa halus.",
+      "Campurkan irisan daun bawang dan cabai merah cincang ke dalam kocokan telur.",
+      "Panaskan minyak agak banyak dalam wajan cekung dengan api sedang-kecil.",
+      "Tuangkan adonan telur. Masak hingga bagian bawah kecokelatan dan kokoh.",
+      "Balik telur dadar secara perlahan, masak hingga kedua sisi matang sempurna dan bagian dalam tebal empuk."
+    ]
+  },
+  {
+    nama: "Telur Ceplok Kuah Kecap Pedas",
+    bahan: ["telur", "kecap manis", "bawang bombay", "bawang putih", "cabai rawit", "daun bawang"],
+    detailBahan: "5 butir telur ayam, 1/2 bawang bombay, 3 bawang putih, 5 cabai rawit iris, 3 sdm kecap manis, 1 sdm saus tiram, 100ml air.",
+    langkah: [
+      "Goreng telur satu per satu menjadi telur ceplok/mata sapi. Sisihkan.",
+      "Tumis bawang putih dan bawang bombay hingga wangi dan sedikit layu.",
+      "Tuangkan air, kecap manis, saus tiram, garam, dan lada bubuk. Aduk mendidih.",
+      "Masukkan irisan cabai rawit dan telur ceplok.",
+      "Masak sebentar hingga kuah kecap meresap ke dalam telur ceplok dan kuah agak menyusut."
+    ]
+  },
+
+  // --- TAHU, TEMPE & SAYURAN ---
+  {
+    nama: "Tahu Cabe Garam Krispi",
+    bahan: ["tahu", "cabai", "bawang putih", "daun bawang", "tepung maizena"],
+    detailBahan: "5 buah tahu putih (potong dadu kecil), 5 sdm tepung maizena, 6 siung bawang putih (cincang halus), 5 cabai rawit merah (cincang), 2 batang daun bawang.",
+    langkah: [
+      "Baluri potongan dadu tahu dengan tepung maizena hingga terlapisi rata.",
+      "Goreng tahu dalam minyak panas hingga permukaannya garing krispi. Angkat dan tiriskan.",
+      "Panaskan sedikit minyak, tumis bawang putih cincang hingga harum dan berwarna kekuningan.",
+      "Masukkan cincangan cabai rawit dan irisan daun bawang, tumis sebentar.",
+      "Bumbui garam dan kaldu bubuk, masukkan tahu krispi, aduk cepat hingga bumbu menempel rata lalu angkat."
+    ]
+  },
+  {
+    nama: "Tumis Kangkung Terasi Saus Tiram",
+    bahan: ["kangkung", "terasi", "cabai", "bawang merah", "bawang putih", "saus tiram"],
+    detailBahan: "2 ikat kangkung segar, 1 sdt terasi bakar, 3 cabai merah, 5 cabai rawit, 4 bawang merah, 2 bawang putih, 1 sdm saus tiram.",
+    langkah: [
+      "Petik kangkung, cuci bersih dengan air mengalir lalu tiriskan.",
+      "Haluskan/iris bawang merah, bawang putih, cabai, dan terasi bakar.",
+      "Tumis bumbu halus hingga wangi. Tambahkan saus tiram dan sedikit air.",
+      "Masukkan kangkung, besarkan api kompor. Tumis cepat selama 2-3 menit agar kangkung tetap hijau dan renyah.",
+      "Bumbui sedikit garam/gula bila perlu, angkat dan sajikan segera."
+    ]
+  },
+  {
+    nama: "Sayur Bening Bayam Jagung Manis",
+    bahan: ["bayam", "jagung", "temu kunci", "bawang merah", "garam", "gula"],
+    detailBahan: "2 ikat daun bayam segar, 1 buah jagung manis (potong-potong/serut), 3 cm temu kunci (memarkan), 4 siung bawang merah (iris tipis), 1 liter air.",
+    langkah: [
+      "Didihkan air di panci bersama irisan bawang merah dan temu kunci geprek.",
+      "Masukkan potongan jagung manis, masak hingga jagung matang empuk.",
+      "Bumbui dengan garam, sedikit gula pasir, dan kaldu jamur secukupnya.",
+      "Masukkan daun bayam yang sudah dicuci bersih.",
+      "Masak sebentar saja (sekitar 1-2 menit) hingga bayam layu, segera matikan api agar gizi dan warna hijaunya terjaga."
+    ]
+  }
+];
+
+
+/* =========================================
+   PENCARIAN MASAKAN DENGAN CARA MEMASAK DETAIL
+========================================= */
+function cariMasakan(){
+  const inputEl = document.getElementById("bahanInput");
+  if(!inputEl) return;
+
+  const rawInput = inputEl.value.trim().toLowerCase();
+
+  if(!rawInput){
+    alert("Masukkan bahan terlebih dahulu 😊");
+    return;
+  }
+
+  const keywords = rawInput
+    .split(/[\s,]+/)
+    .map(x => x.trim())
+    .filter(x => x.length > 0);
+
+  const hasil = resep.filter(r => {
+    if (!r || !Array.isArray(r.bahan)) return false;
+    
+    return keywords.some(keyword => {
+      const matchBahan = r.bahan.some(b => b.toLowerCase().includes(keyword));
+      const matchNama = r.nama.toLowerCase().includes(keyword);
+      return matchBahan || matchNama;
+    });
+  });
+
+  const box = document.getElementById("hasilMasakan");
+  if(!box) return;
+
+  if(hasil.length === 0){
+    box.innerHTML = `
+      <div class="recipe" style="grid-column: 1 / -1; text-align: center;">
+        😅 Belum menemukan masakan yang cocok dengan bahan tersebut.
+        <br><br>
+        Coba masukkan bahan lain seperti: <i>ikan, daging sapi, ayam, telur, cumi, udang, kangkung</i>.
+      </div>`;
+    return;
+  }
+
+  box.innerHTML = hasil.map(r => {
+    const namaClean = r.nama.replace(/'/g, "\\'");
+    
+    let langkahHtml = "";
+    if(Array.isArray(r.langkah)){
+      langkahHtml = `<ol>` + r.langkah.map(l => `<li>${l}</li>`).join("") + `</ol>`;
+    } else {
+      langkahHtml = `<p>${r.cara || ""}</p>`;
+    }
+
+    return `
+      <div class="recipe">
+        <h3>🍽️ ${r.nama}</h3>
+        <p><b>Bahan-bahan:</b> ${r.detailBahan || r.bahan.join(", ")}</p>
+        <p><b>Langkah Memasak:</b></p>
+        ${langkahHtml}
+        <button onclick="tambahMenu('${namaClean}')">
+          ❤️ Simpan ke Menu Mingguan
+        </button>
+      </div>
+    `;
+  }).join("");
+}
+
+
+/* =========================================
+   MENU MINGGUAN
+========================================= */
+const hari = [
+  "Senin",
+  "Selasa",
+  "Rabu",
+  "Kamis",
+  "Jumat",
+  "Sabtu",
+  "Minggu"
+];
+
+function tampilMenu(){
+  const data = safeGetStorage("menuDapurku", {});
+  const container = document.getElementById("menuMingguan");
+  if(!container) return;
+
+  container.innerHTML = hari.map(h => `
+    <div style="margin-bottom:12px">
+      <b>${h}</b>
+      <input
+        value="${data[h] ? String(data[h]).replace(/"/g, '&quot;') : ""}"
+        placeholder="Contoh: Rendang Sapi + Sayur Bening"
+        onchange="simpanMenu('${h}', this.value)"
+      >
+    </div>
+  `).join("");
+}
+
+function simpanMenu(hariName, nama){
+  const data = safeGetStorage("menuDapurku", {});
+  data[hariName] = (nama || "").trim();
+  safeSetStorage("menuDapurku", data);
+}
+
+function tambahMenu(nama){
+  const data = safeGetStorage("menuDapurku", {});
+  const today = new Date().getDay();
+  const index = today === 0 ? 6 : today - 1; // 0 = Minggu -> index 6
+
+  data[hari[index]] = nama;
+  safeSetStorage("menuDapurku", data);
+
+  alert(`❤️ ${nama} berhasil disimpan sebagai menu hari ${hari[index]}`);
+  tampilMenu();
+}
+
+
+/* =========================================
+   BELANJA
+========================================= */
+function tampilBelanja(){
+  const data = safeGetStorage("belanjaDapurku", []);
+  const box = document.getElementById("daftarBelanja");
+  if(!box) return;
+
+  box.innerHTML = Array.isArray(data) && data.length > 0
+    ? data.map((x, i) => `
+      <div class="list-item">
+        <input type="checkbox">
+        <span>${x}</span>
+        <button class="delete" onclick="hapusBelanja(${i})">×</button>
+      </div>
+    `).join("")
+    : "<p>Belum ada daftar belanja.</p>";
+}
+
+function tambahBelanja(){
+  const input = document.getElementById("belanjaInput");
+  if(!input) return;
+  const nilai = input.value.trim();
+
+  if(!nilai) return;
+
+  const data = safeGetStorage("belanjaDapurku", []);
+  data.push(nilai);
+  safeSetStorage("belanjaDapurku", data);
+
+  input.value = "";
+  tampilBelanja();
+}
+
+function hapusBelanja(i){
+  const data = safeGetStorage("belanjaDapurku", []);
+  if(Array.isArray(data) && i >= 0 && i < data.length){
+    data.splice(i, 1);
+    safeSetStorage("belanjaDapurku", data);
+  }
+  tampilBelanja();
+}
+
+
+/* =========================================
+   STOK DAPUR
+========================================= */
+function tampilStok(){
+  const data = safeGetStorage("stokDapurku", []);
+  const box = document.getElementById("daftarStok");
+  if(!box) return;
+
+  box.innerHTML = Array.isArray(data) && data.length > 0
+    ? data.map((x, i) => `
+      <div class="list-item">
+        <span>📦 ${x}</span>
+        <button class="delete" onclick="hapusStok(${i})">×</button>
+      </div>
+    `).join("")
+    : "<p>Belum ada stok dapur.</p>";
+}
+
+function tambahStok(){
+  const input = document.getElementById("stokInput");
+  if(!input) return;
+  const nilai = input.value.trim();
+
+  if(!nilai) return;
+
+  const data = safeGetStorage("stokDapurku", []);
+  data.push(nilai);
+  safeSetStorage("stokDapurku", data);
+
+  input.value = "";
+  tampilStok();
+}
+
+function hapusStok(i){
+  const data = safeGetStorage("stokDapurku", []);
+  if(Array.isArray(data) && i >= 0 && i < data.length){
+    data.splice(i, 1);
+    safeSetStorage("stokDapurku", data);
+  }
+  tampilStok();
+}
+
+
+/* =========================================
+   KALKULATOR BELANJA
+========================================= */
+function tampilHarga(){
+  const data = safeGetStorage("hargaDapurku", []);
+  const box = document.getElementById("daftarHarga");
+  const totalEl = document.getElementById("totalHarga");
+  if(!box || !totalEl) return;
+
+  let total = 0;
+
+  box.innerHTML = Array.isArray(data) ? data.map((x, i) => {
+    const val = Number(x.harga) || 0;
+    total += val;
+
+    return `
+    <div class="list-item">
+      <span>
+        ${x.nama || "Bahan"}<br>
+        <small>Rp${val.toLocaleString("id-ID")}</small>
+      </span>
+      <button class="delete" onclick="hapusHarga(${i})">×</button>
+    </div>
+    `;
+  }).join("") : "";
+
+  totalEl.textContent = "Rp" + total.toLocaleString("id-ID");
+}
+
+function tambahHarga(){
+  const namaEl = document.getElementById("namaHarga");
+  const hargaEl = document.getElementById("nilaiHarga");
+  if(!namaEl || !hargaEl) return;
+
+  const nama = namaEl.value.trim();
+  const harga = Number(hargaEl.value);
+
+  if(!nama || isNaN(harga) || harga <= 0){
+    alert("Lengkapi nama bahan dan nominal harga yang valid.");
+    return;
+  }
+
+  const data = safeGetStorage("hargaDapurku", []);
+  data.push({
+    nama: nama,
+    harga: harga
+  });
+
+  safeSetStorage("hargaDapurku", data);
+
+  namaEl.value = "";
+  hargaEl.value = "";
+
+  tampilHarga();
+}
+
+function hapusHarga(i){
+  const data = safeGetStorage("hargaDapurku", []);
+  if(Array.isArray(data) && i >= 0 && i < data.length){
+    data.splice(i, 1);
+    safeSetStorage("hargaDapurku", data);
+  }
+  tampilHarga();
+}
+
+
+/* =========================================
+   TIMER
+========================================= */
+let timerInterval = null;
+let waktu = 0;
+
+function mulaiTimer(){
+  const inputMenit = document.getElementById("menit");
+  if(!inputMenit) return;
+
+  const menit = Number(inputMenit.value);
+
+  if(!menit || menit < 1){
+    alert("Masukkan waktu dalam menit (minimal 1 menit).");
+    return;
+  }
+
+  clearInterval(timerInterval);
+  waktu = Math.floor(menit * 60);
+  updateTimer();
+
+  timerInterval = setInterval(() => {
+    waktu--;
+    updateTimer();
+
+    if(waktu <= 0){
+      clearInterval(timerInterval);
+      alert("🔔 Waktu memasak selesai!");
+      const display = document.getElementById("timerDisplay");
+      if(display) display.textContent = "00:00";
+    }
+  }, 1000);
+}
+
+function updateTimer(){
+  const m = Math.floor(waktu / 60).toString().padStart(2, "0");
+  const s = (waktu % 60).toString().padStart(2, "0");
+  const display = document.getElementById("timerDisplay");
+  if(display){
+    display.textContent = `${m}:${s}`;
+  }
+}
+
+function stopTimer(){
+  clearInterval(timerInterval);
+  waktu = 0;
+  const display = document.getElementById("timerDisplay");
+  if(display){
+    display.textContent = "00:00";
+  }
+}
+
+
+/* =========================================
+   INIT & EVENT LISTENERS
+========================================= */
+document.addEventListener("DOMContentLoaded", () => {
+  initVisitorCounter();
+  tampilMenu();
+  tampilBelanja();
+  tampilStok();
+  tampilHarga();
+
+  const bahanInput = document.getElementById("bahanInput");
+  if(bahanInput){
+    bahanInput.addEventListener("keydown", (e) => {
+      if(e.key === "Enter") cariMasakan();
+    });
+  }
+});
+
+</script>
+
+</body>
+</html>
